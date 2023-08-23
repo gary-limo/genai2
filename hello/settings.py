@@ -7,7 +7,6 @@ from pathlib import Path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 IS_HEROKU = "DYNO" in os.environ
 
@@ -29,10 +28,9 @@ else:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if not IS_HEROKU:
-    DEBUG = True
+    DEBUG = False
 
-#CSRF_TRUSTED_ORIGINS = ["localhost"]
-SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+CSRF_TRUSTED_ORIGINS = ["https://www.askmybook.com", "http://127.0.0.1"]
 
 # Application definition
 
