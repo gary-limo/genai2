@@ -46,7 +46,7 @@ def index(request):
     return render(request, "index.html")
 
 
-@csrf_exempt
+#@csrf_exempt
 def agency_names(request):
     agency_data = {}
     agents = AgentData.objects.all()
