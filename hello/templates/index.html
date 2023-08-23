@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+   
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+
+  <style>
+    .container-upper {
+        display: block;
+        justify-content: space-between;
+        height: 48px;
+        background-color: white;
+        border: 0;
+    }
+    
+    .icon {
+        width: 100px;
+        height: 28px;
+        display: block;
+        font: 16px;
+        line-height: 25.6px;
+    }
+    
+    .sidebar,
+    .metrics-card,
+    .team-insights {
+    
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        box-sizing: border-box;
+    }
+    
+    .sidebar {
+        flex: 0 0 15%; /* Fixed width of 10% */
+        justify-content: space-between;
+    }
+    
+    .metrics-card {
+        flex: 0 0 30%; /* Fixed width of 20% */
+    }
+    
+    .team-insights {
+        flex: 0 0 30%; /* Fixed width of 30% */
+    }
+    
+    .side-by-side-container {
+        display: flex;
+        gap: 1% ; 
+        
+        margin-top: 30px;
+    }
+    
+    .metrics-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    
+    .metrics-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    
+    .percentage-container {
+        display: flex;
+        align-items: center;
+    }
+    </style>
+    
+ 
+
+  
+</head>
+<body>
+ 
+        <div>
+          <div class="container-upper">
+            <a href="/">
+              <img src="{% static 'Acc_Logo_Black_Purple_RGB.png' %}" loading="lazy" class="icon" />
+            </a>
+          </div>
+           
+        </div>
+      
+        <div class="side-by-side-container">
+            <div class="sidebar">
+                <div class="agency-selector">
+                    <label for="agency-select">Select Agency:</label>
+                    <select id="agency-select"></select>
+                </div>
+                <br>
+                <div class="agent-selector">
+                    <label for="agent-select">Select Agent:</label>
+                    <select id="agent-select"></select>
+                </div>
+            </div>
+        
+            <div class="metrics-card">
+                <div class="metrics-title">Analytics View</div>
+                <div class="metrics-item">
+                    <span>Policies Sold YTD :</span>
+                    <span id="policies-sold-ytd-value"></span> <!-- This span will hold the fetched value -->
+                </div>
+                
+                <div class="metrics-item">
+                    <span>Frauds Identified :</span>
+                    <span id="fraud-value"></span>
+                </div>
+
+                <div class="metrics-item">
+                    <span>Claims Processed :</span>
+                    <span id="claims-value"></span>
+                </div>
+
+                
+                
+            </div>
+
+            <div class="team-insights">
+                <div class="metrics-title">GenAI Insights(Summary)</div>
+                <span></span>
+                <span id="insightsElem"></span>
+                 
+            </div>
+            
+
+
+
+        </div>
+        
+
+      
+        <!-- Bootstrap JS script link -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.3/purify.min.js"></script>
+
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var agencySelect = document.getElementById("agency-select");
+                var agentSelect = document.getElementById("agent-select");
+                const insightsElem = document.getElementById("insightsElem");  
+                var policiesSoldYtdElem = document.getElementById("policies-sold-ytd-value");
+
+                var claims_processed = document.getElementById("claims-value");
+                var frauds_processed = document.getElementById("fraud-value");
+              
+          
+                fetch("/agency_names")
+                    .then(response => response.json())
+                    .then(data => {
+                        Object.keys(data.agency_data).forEach(agencyName => {
+                            var option = document.createElement("option");
+                            option.value = agencyName;
+                            option.textContent = agencyName;
+                            agencySelect.appendChild(option);
+                        });
+              
+                        // Event listener for agency selection
+                        agencySelect.addEventListener("change", function () {
+                            var selectedAgency = agencySelect.value;
+              
+                            // Clear the agent select dropdown
+                            agentSelect.innerHTML = '';
+              
+                            // Populate agent names based on the selected agency
+                            data.agency_data[selectedAgency].forEach(agentName => {
+                                var option = document.createElement("option");
+                                option.value = agentName;
+                                option.textContent = agentName;
+                                agentSelect.appendChild(option);
+                            });
+                        });
+            
+                        // Event listener for agent selection to fetch new data
+                        agentSelect.addEventListener("change", function () {
+                            var selectedAgent = agentSelect.value;
+                            
+                            // Fetch data from the metrics_data endpoint based on the selected agent
+                            fetch(`/metrics_data?agent=${selectedAgent}`)
+                                .then(response => response.json())
+                                .then(metricsData => {
+
+
+        // Update the placeholders with the fetched data
+        policiesSoldYtdElem.textContent = metricsData.policy_issued;
+
+        claims_processed.textContent = metricsData.claims_processed;
+        frauds_processed.textContent = metricsData.fraud_detected;
+    
+
+
+
+        //const sanitizedHTML = DOMPurify.sanitize(metricsData.insights);
+//insightsElem.innerHTML = sanitizedHTML;
+
+let formattedInsights = metricsData.insights.replace(/#/g, '\n');
+insightsElem.innerText = formattedInsights;
+
+
+
+
+ 
+
+
+
+                                })
+                                .catch(error => console.error("Error fetching metrics data:", error));
+                        });
+                    })
+                    .catch(error => console.error("Error fetching agency and agent data:", error));
+            });
+            </script>
+            
+          
+          
+          
+    
+    
+    
+    
+    </body>
+      </html>
+      {% endblock %}

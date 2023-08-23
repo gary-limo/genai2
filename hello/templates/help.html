@@ -1,0 +1,199 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <title>GPT-3</title>
+  <link rel="shortcut icon" href="{% static 'favicon.svg' %}"/>
+   
+  <meta name="og:title" content="Ask Questions"/>
+  <meta name="og:description" content="Curie Model"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+
+  <style>
+    body {
+      overflow: auto;
+    }
+
+    .container-upper {
+      min-height: 70px;
+      display: block;
+      background-color: #ffffff;
+      padding: 14px 15px 26px 15px;
+    }
+
+    .icon {
+      width: 100px;
+      height: 28px;
+      display: block;
+      font: 16px;
+      line-height: 25.6px;
+
+    }
+
+    .video-container {
+      position: relative;
+      border: 0;
+      width: 100%;
+      height: 350px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    video {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -100;
+      object-fit: cover;
+    }
+
+    .video-container .container {
+      height: 100%;
+    }
+
+    .video-wrap {
+      display: flex;
+
+      /* inner banner height css */
+      height: 100%;
+    }
+
+    .welcome-text {
+      position: relative;
+      color: white;
+      font-weight: 600;
+      min-width: 100%;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+
+      /* for inner banner aligning text to left */
+      text-align: left;
+    }
+
+    .welcome-text h1 {
+      font-weight: 300;
+      font-size: 70px;
+
+    }
+
+    @media (max-width: 991px) {
+      .welcome-text h1 {
+        font-size: 40px;
+
+      }
+    }
+
+  </style>
+
+
+
+</head>
+
+<body>
+
+
+  <div class="container-upper">
+    <a href="/">
+      <img src="{% static 'Acc_Logo_Black_Purple_RGB.png' %}" loading="lazy" class="icon" />
+    </a>
+  </div>
+  <div class="video-container">
+    <video muted="" autoplay="" loop="" playsinline="true" preload="auto">
+      <source src="{% static 'banner.mp4' %}" />
+    </video>
+    <div class="container">
+      <div class="video-wrap">
+        <div class="welcome-text">
+          <h1 id="text"></h1>
+          <script>
+            function typeText() {
+              const text = "More about GPT-3 API";
+              const speed = 100; // in milliseconds
+              const element = document.getElementById("text");
+              let index = 0;
+              function type() {
+                if (index < text.length) {
+                  element.innerHTML += text.charAt(index);
+                  index++;
+                  setTimeout(type, speed);
+                }
+              }
+              type();
+            }
+            typeText();
+          </script>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="help p-5">
+    <div class="container">
+      <div >
+        <ul>
+          <li>GPT-3 ("Generative Pre-trained Transformer 3") is a language generation model developed by OpenAI. It uses
+            machine learning to generate natural language text that is difficult to distinguish from text written by a
+            human.
+          </li>
+
+          <li>GPT-3 works by training a large neural network on a dataset of human-generated text, such as books,
+            articles,
+            and websites. The network learns to predict the next word in a sequence of words.
+          </li>
+
+          <li>The proof of concept (POC) was implemented using HTML, CSS, and the Django framework.
+          </li>
+          <li>The POC used the OpenAI API to access GPT-3.
+          </li>
+          <li>The code for the POC is securely hosted on the cloud.
+          </li>
+          <li>Above text is generated using GPT-3.
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+</body>
+
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
+{% endblock %}
