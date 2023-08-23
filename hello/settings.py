@@ -30,7 +30,7 @@ else:
 if not IS_HEROKU:
     DEBUG = False
 
-CSRF_TRUSTED_ORIGINS = ["https://www.askmybook.com", "http://127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["https://www.askmybook.com", "http://127.0.0.1","*"]
 
 # Application definition
 
