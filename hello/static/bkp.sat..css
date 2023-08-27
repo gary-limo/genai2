@@ -1,0 +1,250 @@
+
+
+:root {
+    --white: #FFF;
+    --gray: #F3F3F3;
+    --gray-mid: #9D9D9D;
+    --gray-dark: #3e3e3e;
+    --gray-hover: #F7F7F7;
+    --body-background: #dfdfdf;
+}
+
+body {
+    font-family: 'Poppins';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 16px;
+    background-color: var(--body-background);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.tabs-container {
+    padding: 16px;
+    width: 90vw; /* Already adjusted width */
+    max-width: 95vw; 
+    min-width: 320px; 
+    height: 90vh; /* Use viewport height to set the height */
+    max-height: 95vh; /* Adjusted max-height */
+    min-height: 320px; /* Keep the min-height if you want a lower bound */
+    display: flex;
+    margin: 10px;
+    border-radius: 16px;
+    background-color: var(--white);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;    
+}
+
+
+header {
+    position: relative;
+}
+
+.tab-content-wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 0 16px;
+}
+
+.tab-content h2 {
+    color: var(--gray-dark);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 0px;
+    margin-bottom: 8px;
+}
+
+.tab-content {
+    font-size: 0.8rem;
+    min-height: 300px;
+    min-width: 240px;
+    overflow-x: auto;
+    transition: all 0.45s ease-in-out;
+}
+
+.tabs {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #F0F0F0;
+    list-style-type: none;
+    padding-right: 16px;
+    gap: 8px;
+}
+
+.tabs a {
+    position: relative;
+    display: flex;
+    text-decoration: none;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-mid);
+    text-align: left;
+    border-radius: 8px;
+    justify-content: start;
+    padding: 12px;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.tabs a img {
+    height: 20px;
+    width: 20px;
+}
+
+.tabs .active, .tabs a:hover {
+    font-weight: 700;
+    outline: none;
+    color: white;
+    background-color: var(--gray-dark);
+}
+
+
+.tabs a svg {
+    stroke: var(--gray-mid);
+}
+
+.tabs .active svg {
+    stroke: var(--white);
+}
+
+.tabs a:hover svg {
+    stroke: var(--white);
+} 
+ 
+
+.dropdown {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown label {
+    width: 150px; /* Set a fixed width for the label */
+    margin-right: 10px;
+}
+
+.dropdown select {
+    width: 200px; /* Set a fixed width for the select */
+    height: 30px; /* Set a fixed height for the select */
+}
+
+
+ 
+    .metrics-card 
+      {
+    
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        box-sizing: border-box;
+        width: 400px
+    }
+    
+     
+    
+    .metrics-card {
+        flex: 0 0 30%; /* Fixed width of 20% */
+    }
+    
+    
+    .metrics-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    
+    .metrics-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    
+    .percentage-container {
+        display: flex;
+        align-items: center;
+    }
+
+
+    body {
+        position: relative;
+        height: 100%;
+        width: 100%;
+      }
+      
+      .columns {
+        margin-top: 0;
+      }
+      
+      .section {
+        background-color: #ededed;
+        min-height: 100vh;
+        position: relative;
+        .card {
+          border-radius: 6px;
+          overflow:hidden;
+          max-width: 300px;
+          max-height: 380px;
+          margin: 0 auto;
+          .header {
+            height: 120px;
+            background: #7F00FF;
+            .avatar {
+              width: 80px;
+              height: 100%;
+              position: relative;
+              margin: 0 auto;
+              img {
+                display: block;
+                border-radius: 50%;
+                position: absolute;
+                bottom: -42px;
+                border: 4px solid white;
+              }
+            }
+          }
+          .card-body {
+            padding: 30px;
+            .user-meta {
+              padding-top: 20px;
+              .username {
+                font-size: 18px;
+                font-weight: 600;
+              }
+              .position {
+                font-size: 90%;
+                color: #7F00FF;
+              }
+            }
+          }
+          .user-bio {
+            padding-top: 8px;
+            font-size: 92%;
+            color: #999;
+          }
+          .action {
+            padding-top: 20px;
+            .button {
+              padding: 16px 20px 16px 20px;
+              background: #7F00FF;
+              border-color: #7F00FF;
+              color: white;
+              border-radius: 100px;
+              transition: opacity .3s;
+              &:hover {
+                opacity: 0.7;
+              }
+            }
+          }
+        }
+      }
+      

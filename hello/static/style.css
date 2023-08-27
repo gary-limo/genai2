@@ -1,0 +1,425 @@
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
+:root {
+    --white: #FFF;
+    --gray: #F3F3F3;
+    --gray-mid: #9D9D9D;
+    --gray-dark: #3e3e3e;
+    --gray-hover: #F7F7F7;
+    --body-background: #dfdfdf;
+}
+
+body {
+    font-family: 'Poppins';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 16px;
+    background-color: var(--body-background);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.tabs-container {
+    padding: 16px;
+    width: 90vw; /* Already adjusted width */
+    max-width: 95vw; 
+    min-width: 320px; 
+    height: 90vh; /* Use viewport height to set the height */
+    max-height: 95vh; /* Adjusted max-height */
+    min-height: 320px; /* Keep the min-height if you want a lower bound */
+    display: flex;
+    margin: 10px;
+    border-radius: 16px;
+    background-color: var(--white);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;    
+}
+
+
+header {
+    position: relative;
+}
+
+.tab-content-wrapper {
+    overflow-y: auto;
+    overflow-x: auto;
+
+    padding: 0 16px;
+}
+
+.tab-content h2 {
+    color: var(--gray-dark);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 0px;
+    margin-bottom: 8px;
+}
+
+.tab-content {
+    font-size: 0.8rem;
+    min-height: 300px;
+    min-width: 240px;
+    overflow-x: auto;
+    transition: all 0.45s ease-in-out;
+    margin-top: 30px;
+}
+
+.tabs {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #F0F0F0;
+    list-style-type: none;
+    padding-right: 16px;
+    gap: 8px;
+}
+
+.tabs a {
+    position: relative;
+    display: flex;
+    text-decoration: none;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-mid);
+    text-align: left;
+    border-radius: 8px;
+    justify-content: start;
+    padding: 12px;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.tabs a img {
+    height: 20px;
+    width: 20px;
+}
+
+.tabs .active, .tabs a:hover {
+    font-weight: 700;
+    outline: none;
+    color: white;
+    background-color: var(--gray-dark);
+}
+
+
+.tabs a svg {
+    stroke: var(--gray-mid);
+}
+
+.tabs .active svg {
+    stroke: var(--white);
+}
+
+.tabs a:hover svg {
+    stroke: var(--white);
+} 
+ 
+html, body {
+  
+  font-family: Abel, Arial, Verdana, sans-serif;
+  margin: 0;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card {
+  width: 450px;
+  height: 250px;
+  background-color: #fff;
+  background: linear-gradient(#f8f8f8, #fff);
+  box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  margin: 1.5rem;
+}
+
+.card h1 {
+  text-align: center;
+}
+
+.card .additional {
+  position: absolute;
+  width: 150px;
+  height: 100%;
+  background: linear-gradient(#dE685E, #EE786E);
+  transition: width 0.4s;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.card.green .additional {
+  background: linear-gradient(#92bCa6, #A2CCB6);
+}
+
+
+.card:hover .additional {
+  width: 100%;
+  border-radius: 0 5px 5px 0;
+}
+
+.card .additional .user-card {
+  width: 150px;
+  height: 100%;
+  position: relative;
+  float: left;
+}
+
+.card .additional .user-card::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 10%;
+  right: -2px;
+  height: 80%;
+  border-left: 2px solid rgba(0,0,0,0.025);
+}
+
+.card .additional .user-card .level,
+.card .additional .user-card .points {
+  top: 15%;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  font-weight: bold;
+  background: rgba(0,0,0,0.15);
+  padding: 0.125rem 0.75rem;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.card .additional .user-card .points {
+  top: 85%;
+}
+
+.card .additional .user-card svg {
+  top: 50%;
+}
+
+.card .additional .more-info {
+  width: 300px;
+  float: left;
+  position: absolute;
+  left: 150px;
+  height: 100%;
+}
+
+.card .additional .more-info h1 {
+  color: #fff;
+  margin-bottom: 0;
+}
+
+.card.green .additional .more-info h1 {
+  color: #224C36;
+}
+
+.card .additional .coords {
+  margin: 0 1rem;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.card.green .additional .coords {
+  color: #325C46;
+}
+
+.card .additional .coords span + span {
+  float: right;
+}
+
+.card .additional .stats {
+  font-size: 2rem;
+  display: flex;
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  top: auto;
+  color: #fff;
+}
+
+.card.green .additional .stats {
+  color: #325C46;
+}
+
+.card .additional .stats > div {
+  flex: 1;
+  text-align: center;
+}
+
+.card .additional .stats i {
+  display: block;
+}
+
+.card .additional .stats div.title {
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.card .additional .stats div.value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1.5rem;
+}
+
+.card .additional .stats div.value.infinity {
+  font-size: 2.5rem;
+}
+
+.card .general {
+  width: 300px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  padding: 1rem;
+  margin-top: 3rem ;
+  padding-top: 0;
+   
+    gap: 1rem; /* Adjust the gap as needed */
+    grid-template-columns: max-content 1fr; /* Create two columns */
+  
+}
+
+.card .general span {
+  display: block; /* Display each span on a new line */
+  font-weight: bold; /* Make the text bold */
+  margin-bottom: 0.5rem; /* Add some spacing between each span */
+   
+}
+
+.card .general .more {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.9em;
+ 
+}
+
+
+.additional-card {
+  /* Copy the same styling as your existing card */
+  width: 450px;
+  height: 250px;
+  background-color: #fff;
+  background: linear-gradient(#f8f8f8, #fff);
+  box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  margin: 1.5rem;
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-between; /* Align cards on opposite sides */
+  align-items: flex-start; /* Align cards at the top */
+}
+
+.left-cards {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+ 
+
+.right-card {
+  
+  width: 450px;
+  height: 550px;
+  background-color: #fff;
+  background: linear-gradient(#f8f8f8, #fff);
+  box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  margin: 1.5rem;
+  overflow-y: auto;  
+
+}
+
+.selectors {
+  display: flex;
+}
+
+.selector {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.selector:last-child {
+  margin-right: 0;
+}
+
+.selector h3 {
+  margin: 0;
+  margin-right: 10px;
+}
+
+.info-item {
+  display: grid;
+  grid-template-columns: max-content 1fr; /* Two columns within each item */
+  align-items: center; /* Align items vertically at the center */
+  gap: 0.4rem; /* Gap between name and value */
+  font-weight: bold; /* Make the text bold */
+   
+}
+
+.info-item h2 {
+  margin: 0; /* Reset margin */
+  font-weight: bold; /* Make the text bold */
+}
+
+.info-item span {
+  font-weight: normal; /* Reset font weight */
+}
+
+
+.rankcard {
+  padding: 20px;
+ 
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.ranking-meter {
+  height: 10px;
+
+  background: linear-gradient(to right, green 50%, red 50%);
+  border-radius: 5px;
+  position: relative;
+}
+
+.pointer {
+  height: 20px; /* Adjusted for better visibility with the number */
+  width: 20px; /* Adjusted for better visibility with the number */
+  background-color: blue;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0; 
+  display: flex; /* For centering the number inside the pointer */
+  justify-content: center; 
+  align-items: center;
+  color: white; /* Color of the rank number */
+  font-size: 12px; /* Size of the rank number */
+}

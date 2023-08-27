@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 from .models import AgentData
+from .models import CrossSellData
 from dotenv import load_dotenv
 import os
 import requests
@@ -15,7 +16,139 @@ HOST = "https://api.openai.com/v1/"
 COMPLETIONS = "chat/completions"
 MODEL = "gpt-3.5-turbo-16k-0613"
 API_KEY_FILE = os.environ["OPENAI_API_KEY"]
-PROMPT = "you are a data analyst. Please provide 3 major insights. Provide only Businesss insights. Seprate insights using #. Keep it short. Must include forecast too. i authorize you to forecast. i am aware of the consequences."
+PROMPT = "you are a data analyst. Please provide 3 major insights. Provide only Businesss insights. Seprate insights using #. Keep it short. Please provide relevant crossell insights. Must include forecast too. i authorize you to forecast. i am aware of the consequences."
+
+json_data = '''
+{
+  "total_ranks": 6,
+  "rankings": [
+    {
+      "name": "Carrillo Michael Murray",
+      "rank": 1
+    },
+    {
+      "name": "Golden Kevin Brown",
+      "rank": 1
+    },
+    {
+      "name": "Grimes Andrew Jackson",
+      "rank": 1
+    },
+    {
+      "name": "Martinez Monica Grant",
+      "rank": 1
+    },
+    {
+      "name": "Munoz Daniel Gregory",
+      "rank": 1
+    },
+    {
+      "name": "Perry Kyle Luna",
+      "rank": 1
+    },
+    {
+      "name": "Anderson Peter Moore",
+      "rank": 2
+    },
+    {
+      "name": "Bryant Patrick Perez",
+      "rank": 2
+    },
+    {
+      "name": "Gordon Kathleen Gregory",
+      "rank": 2
+    },
+    {
+      "name": "Hamilton Miguel Cruz",
+      "rank": 2
+    },
+    {
+      "name": "Jacobs Heather Zamora",
+      "rank": 2
+    },
+    {
+      "name": "Martinez Amber Nunez",
+      "rank": 2
+    },
+    {
+      "name": "Zamora Cynthia Carrillo",
+      "rank": 3
+    },
+    {
+      "name": "Cruz Lawrence Perry",
+      "rank": 4
+    },
+    {
+      "name": "Gregory Brian Golden",
+      "rank": 4
+    },
+    {
+      "name": "Moore Stephanie Martinez",
+      "rank": 4
+    },
+    {
+      "name": "Nunez Ashley Grimes",
+      "rank": 4
+    },
+    {
+      "name": "Perez Wanda Munoz",
+      "rank": 4
+    },
+    {
+      "name": "Brown Lisa Johnson",
+      "rank": 5
+    },
+    {
+      "name": "Grant Shawn Hall",
+      "rank": 5
+    },
+    {
+      "name": "Gregory Diane Bray",
+      "rank": 5
+    },
+    {
+      "name": "Jackson Kenneth Jordan",
+      "rank": 5
+    },
+    {
+      "name": "Luna Matthew Nichols",
+      "rank": 5
+    },
+    {
+      "name": "Murray Steven Chapman",
+      "rank": 5
+    },
+    {
+      "name": "Chapman Jason Bryant",
+      "rank": 6
+    },
+    {
+      "name": "Hall Erika Hamilton",
+      "rank": 6
+    },
+    {
+      "name": "Johnson Linda Martinez",
+      "rank": 6
+    },
+    {
+      "name": "Jordan Tammy Anderson",
+      "rank": 6
+    },
+    {
+      "name": "Nichols Jacob Jacobs",
+      "rank": 6
+    }
+  ]
+}
+'''
+
+
+
+python_dict = eval(json_data)
+total_ranks = python_dict["total_ranks"]
+
+
+
 
 def completions(API_KEY_FILE, prompt):
     headers = {
@@ -127,24 +260,39 @@ def metrics_data(request):
     transposed_result = "\n".join(transposed_data)
     transposed_result = transposed_result.replace("_state|", "")
 
-    insights =completions(API_KEY_FILE,transposed_result)
-            
+   
+    #insights="tmp"        
     policy_issued = sum(policy_issue_values)  
     claims_processed = sum(claim_values) 
     fraud_detected = sum(fraud_value) 
 
+
+    rank_info = None
+    for agent in python_dict["rankings"]:
+        if agent["name"] == selected_agent_name:
+            rank_info = agent
+            break
+
+
+    rank=rank_info["rank"]   
+
+    agent_id_value = agents.first().agent_id     
+
+    cross_sell_entries = CrossSellData.objects.filter(agent_id=agent_id_value).values('customer_name', 'speciality', 'additional_households_with_vehicles')
+
+    cs = str(list(cross_sell_entries))
+
+
+    insights =completions(API_KEY_FILE,transposed_result + "Below is crosssell related information." + cs )
+
+
+
  
 
     #print(policy_issued,claims_processed,fraud_detected)
-     
+
 
     #print(insights) 
 
-    return JsonResponse({   'policy_issued': policy_issued ,'claims_processed': claims_processed,'fraud_detected': fraud_detected,  'insights': insights })
+    return JsonResponse({   'policy_issued': policy_issued ,'claims_processed': claims_processed,'fraud_detected': fraud_detected,  'insights': insights , 'total_ranks':total_ranks , 'rank' : rank})
 
-
-
-
-
-
-  

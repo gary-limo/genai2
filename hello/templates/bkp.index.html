@@ -6,293 +6,78 @@
 <head>
 
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+   
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
 
   <style>
- 
-
-      .card {
-      border:none;
-      padding:  0 50px;
+    .container-upper {
+        display: block;
+        justify-content: space-between;
+        height: 48px;
+        background-color: white;
+        border: 0;
     }
-
-    .card::after {
-      position: absolute;
-      z-index: -1;
-      opacity: 0;
-      -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-      transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-
-    .card:hover {
-
-
-      transform: scale(1.02, 1.02);
-      -webkit-transform: scale(1.02, 1.02);
-      backface-visibility: hidden; 
-      will-change: transform;
-      box-shadow: 0 1rem 3rem rgba(0,0,0,.75) !important;
-    }
-
-    .card:hover::after {
-      opacity: 1;
-    }
-
-    .card:hover .btn-outline-primary{
-      color:white;
-      background:#007bff;
-    }
-
-.container-upper {
-      display: block;
-      justify-content: space-between;
-      height: 48px;
-      background-color:white;     
-      border:0;
-    }
-
+    
     .icon {
-      width: 100px;
-      height: 28px;
-      display: block;
-      font: 16px ;
-      line-height: 25.6px; 
-      
+        width: 100px;
+        height: 28px;
+        display: block;
+        font: 16px;
+        line-height: 25.6px;
     }
-
- .video-container {
-  position: absolute;
-  border:0;
-  width: 100%;
-  
-  overflow: hidden;
-  height: 350px; 
-}
-.video-container video {
-  /* Make video to at least 100% wide and tall */
-  min-width: 100%; 
-  display: block;
-  border:0;
-  /* Setting width & height to auto prevents the browser from stretching or squishing the video */
-  width: auto;
-  height: auto;
-  
-
-  /* Center the video */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-}
-
-.video-container .cmp-title__text {
-    font-size: 5.84rem;
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
-
-  .text {
-
-    	/* Font & Text */
-	font-family: Graphik, Arial, system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, ubuntu, "Helvetica Neue", oxygen, cantarell, sans-serif;
-	font-size: 48.4px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 800;
-	letter-spacing: normal;
-	line-height: 58.4px;
-	text-decoration: none solid rgb(255, 255, 255);
-	text-align: start;
-	text-indent: 0px;
-	text-transform: none;
-	vertical-align: baseline;
-	white-space: normal;
-	word-spacing: 0px;
-
-   
-    	/* Color & Background */
-	background-attachment: scroll;
-	background-color: rgba(0, 0, 0, 0);
-	background-image: none;
-	background-position: 0% 0%;
-	background-repeat: repeat;
-	color: rgb(255, 255, 255);
-
-
-
-
-    position: absolute;
-    height: 106.4px;
-    width: 906px;
-    top: 35%;
-    left: 45%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    font-size: 58.4px;
-    line-height:  58.4px;
-    color:white;
-    font-weight: 800;
-    padding: 30px 0 0 0 ;
-    min-width: 876px;
- 
-
-  }
-
-
-  .text_2 {
-
-/* Font & Text */
-font-family: Graphik, Arial, system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, ubuntu, "Helvetica Neue", oxygen, cantarell, sans-serif;
-font-size: 18px;
-font-style: normal;
-font-variant: normal;
-font-weight: 800;
-letter-spacing: normal;
-line-height: 58.4px;
-text-decoration: none solid rgb(255, 255, 255);
-text-align: start;
-text-indent: 0px;
-text-transform: none;
-vertical-align: baseline;
-white-space: normal;
-word-spacing: 0px;
-
-
-/* Color & Background */
-background-attachment: scroll;
-background-color: rgba(0, 0, 0, 0);
-background-image: none;
-background-position: 0% 0%;
-background-repeat: repeat;
-color: rgb(255, 255, 255);
-
-
-
-
-position: absolute;
-height: 156.4px;
-width: 906px;
-top: 95%;
-left: 45%;
-transform: translate(-50%, -50%);
-z-index: 2;
-
-line-height:  58.4px;
-color:white;
-font-weight: 400;
-padding: 30px 0 0 0 ;
-min-width: 876px;
-
-
-}
-
-
- 
- 
- 
-.case_studies_container {
-    top: 50%;
-    position:absolute;
-    left: 5%;
-  
-   
-}
- 
- 
- 
-.typing {
-        border-right: 0.15em solid #ffffff;
-        white-space: nowrap;
-        overflow: hidden;
-        font-family: monospace;
-        font-size: 1.5em;
-      }
-
- 
-      /* Remove margin-top from sidebar as it will be handled by the parent container */
-.sidebar {
-  width: 260px;
-  background-color: #f8f9fa;
-  padding: 20px;
-}
-
-/* Update metrics-card for proper spacing */
-.metrics-card {
-  width: calc(100% - 390px); /* Assuming 250px width of sidebar and 20px padding on both sides + 20px margin between sidebar and metrics-card */
-  margin-left: 20px;
-  padding: 20px;
-  border: 1px solid #ced4da;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: white;
-}
-
-.side-by-side-container {
-  display: flex;
-  justify-content: space-between; /* This will ensure the metrics-card stays on the right */
-  margin-top: 380px; /* You can adjust this value to increase/decrease spacing between the video and these elements */
-}
- 
-    .agent-selector label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: bold;
+    
+    .sidebar,
+    .metrics-card,
+    .team-insights {
+    
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        box-sizing: border-box;
     }
-    .agent-selector select {
-      width: 100%;
-      padding: 5px;
-      border: 1px solid #ced4da;
-      border-radius: 3px;
+    
+    .sidebar {
+        flex: 0 0 15%; /* Fixed width of 10% */
+        justify-content: space-between;
     }
-
- 
-
- 
-
-.metrics-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.metrics-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
- 
-
-.percentage-container {
-    display: flex;
-    align-items: center; /* to align the text and pie chart vertically */
-}
-
-.pie {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-left: 10px;
-    background: conic-gradient(dodgerblue calc(var(--percentage) * 1%), gray 0%);
-}
-
- 
-
-
-
- 
-</style>
+    
+    .metrics-card {
+        flex: 0 0 30%; /* Fixed width of 20% */
+    }
+    
+    .team-insights {
+        flex: 0 0 30%; /* Fixed width of 30% */
+    }
+    
+    .side-by-side-container {
+        display: flex;
+        gap: 1% ; 
+        
+        margin-top: 30px;
+    }
+    
+    .metrics-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    
+    .metrics-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    
+    .percentage-container {
+        display: flex;
+        align-items: center;
+    }
+    </style>
+    
  
 
   
@@ -305,17 +90,7 @@ min-width: 876px;
               <img src="{% static 'Acc_Logo_Black_Purple_RGB.png' %}" loading="lazy" class="icon" />
             </a>
           </div>
-          <div class="video-container">
-            <video muted="" autoplay="" loop="" playsinline="true" preload="auto">
-              <source src="{% static 'banner.mp4' %}" />
-            </video>
-            <div class="overlay"></div>
-            <div class="text">
-              <div id="text"></div>
-            </div>
-            <div class="overlay"></div>
-            <div class="text_2" style="bottom: 10%"></div>
-          </div>
+           
         </div>
       
         <div class="side-by-side-container">
@@ -324,6 +99,7 @@ min-width: 876px;
                     <label for="agency-select">Select Agency:</label>
                     <select id="agency-select"></select>
                 </div>
+                <br>
                 <div class="agent-selector">
                     <label for="agent-select">Select Agent:</label>
                     <select id="agent-select"></select>
@@ -331,78 +107,122 @@ min-width: 876px;
             </div>
         
             <div class="metrics-card">
-                <div class="metrics-title">RSD View</div>
+                <div class="metrics-title">Analytics View</div>
                 <div class="metrics-item">
                     <span>Policies Sold YTD :</span>
-                     
-                    
+                    <span id="policies-sold-ytd-value"></span> <!-- This span will hold the fetched value -->
                 </div>
+                
                 <div class="metrics-item">
                     <span>Frauds Identified :</span>
-                    <span>$50000</span>
+                    <span id="fraud-value"></span>
                 </div>
 
                 <div class="metrics-item">
                     <span>Claims Processed :</span>
-                    <span>$50000</span>
+                    <span id="claims-value"></span>
                 </div>
 
-                <div class="metrics-item">
-                    <span>Digital Adoption:</span>
-                    <div class="percentage-container">
-                        <span class="percentage-label">50%</span>
-                        <div class="pie" style="--percentage: 50;"></div>
-                    </div>
-                </div>
                 
                 
-
-
-                <!-- Add more metrics items as needed -->
             </div>
+
+            <div class="team-insights">
+                <div class="metrics-title">GenAI Insights(Summary)</div>
+                <span></span>
+                <span id="insightsElem"></span>
+                 
+            </div>
+            
+
+
+
         </div>
         
 
       
         <!-- Bootstrap JS script link -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.3/purify.min.js"></script>
+
+        
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-              var agencySelect = document.getElementById("agency-select");
-              var agentSelect = document.getElementById("agent-select");
-          
-              // Fetch agency and agent data using AJAX
-              fetch("/agency_names")
-                .then(response => response.json())
-                .then(data => {
+                var agencySelect = document.getElementById("agency-select");
+                var agentSelect = document.getElementById("agent-select");
+                const insightsElem = document.getElementById("insightsElem");  
+                var policiesSoldYtdElem = document.getElementById("policies-sold-ytd-value");
 
-                  Object.keys(data.agency_data).forEach(agencyName => {
-                    var option = document.createElement("option");
-                    option.value = agencyName;
-                    option.textContent = agencyName;
-                    agencySelect.appendChild(option);
-                  });
+                var claims_processed = document.getElementById("claims-value");
+                var frauds_processed = document.getElementById("fraud-value");
+              
           
-                  // Event listener for agency selection
-                  agencySelect.addEventListener("change", function () {
-                    var selectedAgency = agencySelect.value;
-          
-                    // Clear the agent select dropdown
-                    agentSelect.innerHTML = '';
-          
-                    // Populate agent names based on the selected agency
-                    data.agency_data[selectedAgency].forEach(agentName => {
-                      var option = document.createElement("option");
-                      option.value = agentName;
-                      option.textContent = agentName;
-                      agentSelect.appendChild(option);
-                    });
-                  });
-                })
-                .catch(error => console.error("Error fetching agency and agent data:", error));
+                fetch("/agency_names")
+                    .then(response => response.json())
+                    .then(data => {
+                        Object.keys(data.agency_data).forEach(agencyName => {
+                            var option = document.createElement("option");
+                            option.value = agencyName;
+                            option.textContent = agencyName;
+                            agencySelect.appendChild(option);
+                        });
+              
+                        // Event listener for agency selection
+                        agencySelect.addEventListener("change", function () {
+                            var selectedAgency = agencySelect.value;
+              
+                            // Clear the agent select dropdown
+                            agentSelect.innerHTML = '';
+              
+                            // Populate agent names based on the selected agency
+                            data.agency_data[selectedAgency].forEach(agentName => {
+                                var option = document.createElement("option");
+                                option.value = agentName;
+                                option.textContent = agentName;
+                                agentSelect.appendChild(option);
+                            });
+                        });
+            
+                        // Event listener for agent selection to fetch new data
+                        agentSelect.addEventListener("change", function () {
+                            var selectedAgent = agentSelect.value;
+                            
+                            // Fetch data from the metrics_data endpoint based on the selected agent
+                            fetch(`/metrics_data?agent=${selectedAgent}`)
+                                .then(response => response.json())
+                                .then(metricsData => {
+
+
+        // Update the placeholders with the fetched data
+        policiesSoldYtdElem.textContent = metricsData.policy_issued;
+
+        claims_processed.textContent = metricsData.claims_processed;
+        frauds_processed.textContent = metricsData.fraud_detected;
+    
+
+
+
+        //const sanitizedHTML = DOMPurify.sanitize(metricsData.insights);
+//insightsElem.innerHTML = sanitizedHTML;
+
+let formattedInsights = metricsData.insights.replace(/#/g, '\n');
+insightsElem.innerText = formattedInsights;
+
+
+
+
+ 
+
+
+
+                                })
+                                .catch(error => console.error("Error fetching metrics data:", error));
+                        });
+                    })
+                    .catch(error => console.error("Error fetching agency and agent data:", error));
             });
-          </script>
-          
+            </script>
+            
           
           
           

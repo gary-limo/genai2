@@ -1,0 +1,82 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>GenAI POC</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+            rel="stylesheet"
+            type='text/css'
+        >
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    </head>
+    <body>
+        <div class="tabs-container">
+            <ul class="tabs">
+                <li>
+                    <a id="tab1" title="Home" href="#tab1">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
+                             fill="none" stroke-linecap="round" stroke-linejoin="round"
+                        >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M3 3v18h18"></path>
+                            <path d="M20 18v3"></path>
+                            <path d="M16 16v5"></path>
+                            <path d="M12 13v8"></path>
+                            <path d="M8 16v5"></path>
+                            <path d="M3 11c6 0 5 -5 9 -5s3 5 9 5"></path>
+                        </svg>
+                        Insight Center
+                    </a>
+                 
+            </ul>
+            <div class="tab-content-wrapper">
+                <section id="tab1-content" class="tab-content">
+
+
+                    <div class="section">
+                        <div class="container">
+                          <div class="columns">
+                            <div class="column is-4 is-offset-4">
+                              <div class="card">
+                                <div class="header">
+                                  <div class="avatar">
+                                    <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="">
+                                  </div>
+                                </div>
+                                <div class="card-body">
+                                  <div class="user-meta has-text-centered">
+                                    <h3 class="username">Helen Miller</h3>
+                                    <h5 class="position">Accountant</h5>
+                                  </div>
+                                  <div class="user-bio has-text-centered">
+                                    <p>Helen Miller is an accountant at the Acme Inc comany. She works very hard.</p>
+                                  </div>
+                                  <div class="action has-text-centered">
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                       
+                      </div>
+
+                    
+                </section>
+               
+               
+            </div>
+        </div>
+        <script src="{% static 'script.js' %}"></script>
+        <script src="{% static 'ajax.js' %}"></script>
+    </body>
+</html>
+    
