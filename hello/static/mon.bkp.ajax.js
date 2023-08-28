@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const agentNameElement = document.getElementById('agent-name'); // Element to update
     var state_name  = document.getElementById("state-name");
 
-     
-
   
     // Add default options to agency and agent dropdowns
     agencySelect.innerHTML = '<option value="" disabled selected>Select Agency</option>';
@@ -48,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             });
 
-           
+
 
 
             // Event listener for agent selection to fetch new data
@@ -96,65 +94,71 @@ document.addEventListener("DOMContentLoaded", function () {
                             pointer.style.left = `calc(${percentage}% - 2.5px)`;
                             rankNumber.textContent = currentRank; 
 
-                             
 
                             const apiResponse = JSON.parse(metricsData.forecast)
 
-                             
+                            console.log(apiResponse)
 
                             const months = Object.keys(apiResponse.policy_sold);
-                            const policySoldData = Object.values(apiResponse.policy_sold);
-                            const claimsData = Object.values(apiResponse.claims);
-                            const fraudData = Object.values(apiResponse.fraud);
+    const policySoldData = Object.values(apiResponse.policy_sold);
+    const claimsData = Object.values(apiResponse.claims);
+    const fraudData = Object.values(apiResponse.fraud);
 
-                            const newData = {
-                                labels: months,
-                                datasets: [
-                                    {
-                                        label: "Policy Sold",
-                                        data: policySoldData,
-                                        borderColor: "blue",
-                                        fill: false
-                                    },
-                                    {
-                                        label: "Claims",
-                                        data: claimsData,
-                                        borderColor: "green",
-                                        fill: false
-                                    },
-                                    {
-                                        label: "Fraud",
-                                        data: fraudData,
-                                        borderColor: "red",
-                                        fill: false
-                                    }
-                                ]
-                            };
-                    
-                            // Create a new chart instance every time
-                            const ctx = document.getElementById("metricsChart").getContext("2d");
-                            new Chart(ctx, {
-                                type: "line",
-                                data: newData,
-                                options: {
-                                    responsive: true,
-                                    plugins: {
-                                        title: {
-                                            display: true,
-                                            text: "Forecast"
-                                        }
-                                    },
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true,
-                                            max: 20,
-                                            ticks: {
-                                                stepSize: 5, // Set the step size to 5 to show multiples of 5
-                                            },
-                                        },
-                                    },
-                                },
-                            });
+    const data = {
+      labels: months,
+      datasets: [
+        {
+          label: "Policy Sold",
+          data: policySoldData,
+          borderColor: "blue",
+          fill: false
+        },
+        {
+          label: "Claims",
+          data: claimsData,
+          borderColor: "green",
+          fill: false
+        },
+        {
+          label: "Fraud",
+          data: fraudData,
+          borderColor: "red",
+          fill: false
+        }
+      ]
+    };
+
+    const config = {
+        type: "line",
+        data: data,
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: "Forecast"
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 20   ,
+              ticks: {
+                stepSize: 5, // Set the step size to 5 to show multiples of 5
+              },
+            },
+          },
+        },
+      };
+      
+      const ctx = document.getElementById("metricsChart").getContext("2d");
+      new Chart(ctx, config);
+      
+
+      chart.data = data;
+            chart.update();
+
+
 
 
 
@@ -162,8 +166,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         .catch(error => console.error("Error fetching metrics data:", error));
                 }
             });
-      
-
         })
         .catch(error => console.error("Error fetching agency and agent data:", error));
 });

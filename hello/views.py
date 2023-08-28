@@ -16,136 +16,45 @@ HOST = "https://api.openai.com/v1/"
 COMPLETIONS = "chat/completions"
 MODEL = "gpt-3.5-turbo-16k-0613"
 API_KEY_FILE = os.environ["OPENAI_API_KEY"]
-PROMPT = "you are a data analyst. Please provide 3 major insights. Provide only Businesss insights. Seprate insights using #. Keep it short. Please provide relevant crossell insights. Must include forecast too. i authorize you to forecast. i am aware of the consequences."
+PROMPT = "you are a business analyst" 
 
 json_data = '''
-{
-  "total_ranks": 6,
-  "rankings": [
-    {
-      "name": "Carrillo Michael Murray",
-      "rank": 1
-    },
-    {
-      "name": "Golden Kevin Brown",
-      "rank": 1
-    },
-    {
-      "name": "Grimes Andrew Jackson",
-      "rank": 1
-    },
-    {
-      "name": "Martinez Monica Grant",
-      "rank": 1
-    },
-    {
-      "name": "Munoz Daniel Gregory",
-      "rank": 1
-    },
-    {
-      "name": "Perry Kyle Luna",
-      "rank": 1
-    },
-    {
-      "name": "Anderson Peter Moore",
-      "rank": 2
-    },
-    {
-      "name": "Bryant Patrick Perez",
-      "rank": 2
-    },
-    {
-      "name": "Gordon Kathleen Gregory",
-      "rank": 2
-    },
-    {
-      "name": "Hamilton Miguel Cruz",
-      "rank": 2
-    },
-    {
-      "name": "Jacobs Heather Zamora",
-      "rank": 2
-    },
-    {
-      "name": "Martinez Amber Nunez",
-      "rank": 2
-    },
-    {
-      "name": "Zamora Cynthia Carrillo",
-      "rank": 3
-    },
-    {
-      "name": "Cruz Lawrence Perry",
-      "rank": 4
-    },
-    {
-      "name": "Gregory Brian Golden",
-      "rank": 4
-    },
-    {
-      "name": "Moore Stephanie Martinez",
-      "rank": 4
-    },
-    {
-      "name": "Nunez Ashley Grimes",
-      "rank": 4
-    },
-    {
-      "name": "Perez Wanda Munoz",
-      "rank": 4
-    },
-    {
-      "name": "Brown Lisa Johnson",
-      "rank": 5
-    },
-    {
-      "name": "Grant Shawn Hall",
-      "rank": 5
-    },
-    {
-      "name": "Gregory Diane Bray",
-      "rank": 5
-    },
-    {
-      "name": "Jackson Kenneth Jordan",
-      "rank": 5
-    },
-    {
-      "name": "Luna Matthew Nichols",
-      "rank": 5
-    },
-    {
-      "name": "Murray Steven Chapman",
-      "rank": 5
-    },
-    {
-      "name": "Chapman Jason Bryant",
-      "rank": 6
-    },
-    {
-      "name": "Hall Erika Hamilton",
-      "rank": 6
-    },
-    {
-      "name": "Johnson Linda Martinez",
-      "rank": 6
-    },
-    {
-      "name": "Jordan Tammy Anderson",
-      "rank": 6
-    },
-    {
-      "name": "Nichols Jacob Jacobs",
-      "rank": 6
-    }
-  ]
-}
+[
+    {"Rank": 1, "Agent Name": "Carrillo Michael Murray"},
+    {"Rank": 2, "Agent Name": "Golden Kevin Brown"},
+    {"Rank": 3, "Agent Name": "Grimes Andrew Jackson"},
+    {"Rank": 4, "Agent Name": "Perry Kyle Luna"},
+    {"Rank": 5, "Agent Name": "Martinez Monica Grant"},
+    {"Rank": 6, "Agent Name": "Munoz Daniel Gregory"},
+    {"Rank": 7, "Agent Name": "Bryant Patrick Perez"},
+    {"Rank": 8, "Agent Name": "Gordon Kathleen Gregory"},
+    {"Rank": 9, "Agent Name": "Hamilton Miguel Cruz"},
+    {"Rank": 10, "Agent Name": "Jacobs Heather Zamora"},
+    {"Rank": 11, "Agent Name": "Johnson Linda Martinez"},
+    {"Rank": 12, "Agent Name": "Jordan Tammy Anderson"},
+    {"Rank": 13, "Agent Name": "Martinez Amber Nunez"},
+    {"Rank": 14, "Agent Name": "Anderson Peter Moore"},
+    {"Rank": 15, "Agent Name": "Cruz Lawrence Perry"},
+    {"Rank": 16, "Agent Name": "Gregory Brian Golden"},
+    {"Rank": 17, "Agent Name": "Moore Stephanie Martinez"},
+    {"Rank": 18, "Agent Name": "Nunez Ashley Grimes"},
+    {"Rank": 19, "Agent Name": "Perez Wanda Munoz"},
+    {"Rank": 20, "Agent Name": "Zamora Cynthia Carrillo"},
+    {"Rank": 21, "Agent Name": "Chapman Jason Bryant"},
+    {"Rank": 22, "Agent Name": "Hall Erika Hamilton"},
+    {"Rank": 23, "Agent Name": "Nichols Jacob Jacobs"},
+    {"Rank": 24, "Agent Name": "Brown Lisa Johnson"},
+    {"Rank": 25, "Agent Name": "Grant Shawn Hall"},
+    {"Rank": 26, "Agent Name": "Gregory Diane Bray"},
+    {"Rank": 27, "Agent Name": "Jackson Kenneth Jordan"},
+    {"Rank": 28, "Agent Name": "Luna Matthew Nichols"},
+    {"Rank": 29, "Agent Name": "Murray Steven Chapman"},
+    {"Rank": 30, "Agent Name": "Bray Lindsay Stewart"}
+]
 '''
 
-
-
-python_dict = eval(json_data)
-total_ranks = python_dict["total_ranks"]
+# Parse the JSON data into a Python list of dictionaries
+agents_list = json.loads(json_data)
 
 
 
@@ -159,7 +68,7 @@ def completions(API_KEY_FILE, prompt):
 
     data = {
         "model": MODEL,
-        "temperature": 0,
+        "temperature": 0.1,
       
         "messages": [{"role": "system", "content": PROMPT}, {"role": "user", "content": prompt}],
     }
@@ -260,6 +169,12 @@ def metrics_data(request):
     transposed_result = "\n".join(transposed_data)
     transposed_result = transposed_result.replace("_state|", "")
 
+    adj=''
+
+    if(selected_agent_name == "Anderson Peter Moore"):
+        adj='Special note: total frauds identified is 4'
+
+
    
     #insights="tmp"        
     policy_issued = sum(policy_issue_values)  
@@ -267,14 +182,13 @@ def metrics_data(request):
     fraud_detected = sum(fraud_value) 
 
 
-    rank_info = None
-    for agent in python_dict["rankings"]:
-        if agent["name"] == selected_agent_name:
-            rank_info = agent
+    for agent in agents_list:
+        if agent["Agent Name"] == selected_agent_name:
+            rank_info = agent["Rank"]
             break
 
 
-    rank=rank_info["rank"]   
+    rank=rank_info; 
 
     agent_id_value = agents.first().agent_id     
 
@@ -282,8 +196,34 @@ def metrics_data(request):
 
     cs = str(list(cross_sell_entries))
 
+    pmt = """Provide 3 major insights. Provide only Businesss insights excluding crossell data. Seprate insights using #. Keep it short. 
+In addition to 3 insights above provide  if any relevant crossell insights are avaialble , skip crossell section if relevant information is not there.if Speciality indicator is Yes then agent can offer Boat Insurance and similarly if Additional Households with Vehicles indicator has value then the agent can offer vehicle insurance to the person listed. 
+ideal response is : Boat insurance can be offered to Lowe Kaitlyn Valencia, Agent can offer vehicle insurance to  Lowe Kaitlyn Valencia's son.
+please consider some pointers. Digital adoption means  paperless billing. higher digital adoption means higher paperless statements.
+Do not respond like "The agent has a high level of digital adoption as indicated by the "Yes" value in the digital_adoption column".
+do not include response such as customer has a speciality indicator of "Yes". Do not provide technical information such as some transactions having a "No" value in the digital_adoption column and others having a "Yes" value. 
+"""
 
-    insights =completions(API_KEY_FILE,transposed_result + "Below is crosssell related information." + cs )
+
+    insights =completions(API_KEY_FILE, adj+pmt+ transposed_result + "Below is crosssell related information." + cs )
+    #insights='tmp'
+
+    fcast_prompt=""" based on the data just give me forecast of a next 6 months for policy sold, claims and fraud. 
+    I am aware of the consequences. respond only in the json format.
+    do not give me any warning. please use linear regression.
+    """
+
+
+    forecast =completions(API_KEY_FILE, fcast_prompt+transposed_result)
+
+    
+    #print(forecast)
+
+
+     
+    agent_state = agents.first()  # Get the first agent from the queryset
+    state_name = agent_state.states
+    total_ranks =30
 
 
 
@@ -292,7 +232,7 @@ def metrics_data(request):
     #print(policy_issued,claims_processed,fraud_detected)
 
 
-    #print(insights) 
+     
 
-    return JsonResponse({   'policy_issued': policy_issued ,'claims_processed': claims_processed,'fraud_detected': fraud_detected,  'insights': insights , 'total_ranks':total_ranks , 'rank' : rank})
+    return JsonResponse({   'policy_issued': policy_issued ,'claims_processed': claims_processed,'fraud_detected': fraud_detected,  'insights': insights , 'total_ranks':total_ranks , 'rank' : rank , 'state_name' : state_name, 'forecast': forecast})
 

@@ -8,16 +8,25 @@ django.setup()
 
 from hello.models import AgentData  # Import your AgentData model
 
-# Query the database to get the policy issued count for each agent
-policy_issued_by_agent = AgentData.objects.values('agent_name').annotate(policy_issued=Sum('policy_issue'))
+# Query the database to get the policy issued count, claim count, and fraud detected count for each agent
+agent_data = AgentData.objects.values('agent_name').annotate(
+    policy_issued=Sum('policy_issue'),
+    claim_count=Sum('claim'),
+    fraud_detected_count=Sum('fraud_detected')
+)
 
-# Create a dictionary to store agent names and policy issued counts
-policy_issued_data = defaultdict(int)
-for item in policy_issued_by_agent:
+# Create a dictionary to store agent data
+agent_info = defaultdict(dict)
+for item in agent_data:
     agent_name = item['agent_name']
-    policy_issued = item['policy_issued']
-    policy_issued_data[agent_name] = policy_issued
+    agent_info[agent_name]['policy_issued'] = item['policy_issued']
+    agent_info[agent_name]['claim_count'] = item['claim_count']
+    agent_info[agent_name]['fraud_detected_count'] = item['fraud_detected_count']
 
-
-
-print(dict(policy_issued_data))
+# Print the agent information nicely
+for agent_name, info in agent_info.items():
+    print(f"Agent Name: {agent_name}")
+    print(f"Policy Issued: {info['policy_issued']}")
+    print(f"Claim Count: {info['claim_count']}")
+    print(f"Fraud Detected Count: {info['fraud_detected_count']}")
+    print("=" * 20)

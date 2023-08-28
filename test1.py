@@ -1,150 +1,51 @@
-import json 
-
+import json
 
 json_data = '''
-{
-  "total_ranks": 6,
-  "rankings": [
-    {
-      "name": "Carrillo Michael Murray",
-      "rank": 1
-    },
-    {
-      "name": "Golden Kevin Brown",
-      "rank": 1
-    },
-    {
-      "name": "Grimes Andrew Jackson",
-      "rank": 1
-    },
-    {
-      "name": "Martinez Monica Grant",
-      "rank": 1
-    },
-    {
-      "name": "Munoz Daniel Gregory",
-      "rank": 1
-    },
-    {
-      "name": "Perry Kyle Luna",
-      "rank": 1
-    },
-    {
-      "name": "Anderson Peter Moore",
-      "rank": 2
-    },
-    {
-      "name": "Bryant Patrick Perez",
-      "rank": 2
-    },
-    {
-      "name": "Gordon Kathleen Gregory",
-      "rank": 2
-    },
-    {
-      "name": "Hamilton Miguel Cruz",
-      "rank": 2
-    },
-    {
-      "name": "Jacobs Heather Zamora",
-      "rank": 2
-    },
-    {
-      "name": "Martinez Amber Nunez",
-      "rank": 2
-    },
-    {
-      "name": "Zamora Cynthia Carrillo",
-      "rank": 3
-    },
-    {
-      "name": "Cruz Lawrence Perry",
-      "rank": 4
-    },
-    {
-      "name": "Gregory Brian Golden",
-      "rank": 4
-    },
-    {
-      "name": "Moore Stephanie Martinez",
-      "rank": 4
-    },
-    {
-      "name": "Nunez Ashley Grimes",
-      "rank": 4
-    },
-    {
-      "name": "Perez Wanda Munoz",
-      "rank": 4
-    },
-    {
-      "name": "Brown Lisa Johnson",
-      "rank": 5
-    },
-    {
-      "name": "Grant Shawn Hall",
-      "rank": 5
-    },
-    {
-      "name": "Gregory Diane Bray",
-      "rank": 5
-    },
-    {
-      "name": "Jackson Kenneth Jordan",
-      "rank": 5
-    },
-    {
-      "name": "Luna Matthew Nichols",
-      "rank": 5
-    },
-    {
-      "name": "Murray Steven Chapman",
-      "rank": 5
-    },
-    {
-      "name": "Chapman Jason Bryant",
-      "rank": 6
-    },
-    {
-      "name": "Hall Erika Hamilton",
-      "rank": 6
-    },
-    {
-      "name": "Johnson Linda Martinez",
-      "rank": 6
-    },
-    {
-      "name": "Jordan Tammy Anderson",
-      "rank": 6
-    },
-    {
-      "name": "Nichols Jacob Jacobs",
-      "rank": 6
-    }
-  ]
-}
+[
+    {"Rank": 1, "Agent Name": "Carrillo Michael Murray"},
+    {"Rank": 2, "Agent Name": "Golden Kevin Brown"},
+    {"Rank": 3, "Agent Name": "Grimes Andrew Jackson"},
+    {"Rank": 4, "Agent Name": "Perry Kyle Luna"},
+    {"Rank": 5, "Agent Name": "Martinez Monica Grant"},
+    {"Rank": 6, "Agent Name": "Munoz Daniel Gregory"},
+    {"Rank": 7, "Agent Name": "Bryant Patrick Perez"},
+    {"Rank": 8, "Agent Name": "Gordon Kathleen Gregory"},
+    {"Rank": 9, "Agent Name": "Hamilton Miguel Cruz"},
+    {"Rank": 10, "Agent Name": "Jacobs Heather Zamora"},
+    {"Rank": 11, "Agent Name": "Johnson Linda Martinez"},
+    {"Rank": 12, "Agent Name": "Jordan Tammy Anderson"},
+    {"Rank": 13, "Agent Name": "Martinez Amber Nunez"},
+    {"Rank": 14, "Agent Name": "Anderson Peter Moore"},
+    {"Rank": 15, "Agent Name": "Cruz Lawrence Perry"},
+    {"Rank": 16, "Agent Name": "Gregory Brian Golden"},
+    {"Rank": 17, "Agent Name": "Moore Stephanie Martinez"},
+    {"Rank": 18, "Agent Name": "Nunez Ashley Grimes"},
+    {"Rank": 19, "Agent Name": "Perez Wanda Munoz"},
+    {"Rank": 20, "Agent Name": "Zamora Cynthia Carrillo"},
+    {"Rank": 21, "Agent Name": "Chapman Jason Bryant"},
+    {"Rank": 22, "Agent Name": "Hall Erika Hamilton"},
+    {"Rank": 23, "Agent Name": "Nichols Jacob Jacobs"},
+    {"Rank": 24, "Agent Name": "Brown Lisa Johnson"},
+    {"Rank": 25, "Agent Name": "Grant Shawn Hall"},
+    {"Rank": 26, "Agent Name": "Gregory Diane Bray"},
+    {"Rank": 27, "Agent Name": "Jackson Kenneth Jordan"},
+    {"Rank": 28, "Agent Name": "Luna Matthew Nichols"},
+    {"Rank": 29, "Agent Name": "Murray Steven Chapman"},
+    {"Rank": 30, "Agent Name": "Bray Lindsay Stewart"}
+]
 '''
 
-# Parse the JSON data into a Python dictionary
-python_dict = eval(json_data)
-
-# Print the Python dictionary
-total_ranks = python_dict["total_ranks"]
-print("Total Ranks:", total_ranks)
+# Parse the JSON data into a Python list of dictionaries
+agents_list = json.loads(json_data)
 
 # Name to search for
 search_name = "Carrillo Michael Murray"
 
-# Find rank information based on the search_name
-rank_info = None
-for agent in python_dict["rankings"]:
-    if agent["name"] == search_name:
-        rank_info = agent
+# Find the rank based on the agent name
+for agent in agents_list:
+    if agent["Agent Name"] == search_name:
+        rank_info = agent["Rank"]
         break
 
-# If the agent was found
-if rank_info:
-    print("Name:", rank_info["name"])
-    print("Rank:", rank_info["rank"])
-else:
-    print(f"Agent '{search_name}' not found.")
+# Print the rank information
+print(f"The rank for {search_name} is {rank_info}")
