@@ -142,7 +142,19 @@ html, body {
   background: linear-gradient(#f8f8f8, #fff);
   box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
   border-radius: 6px;
-  overflow: auto;  
+  overflow: hidden;
+  position: relative;
+  margin: 1.5rem;
+}
+
+.card2 {
+  width: 450px;
+  height: 250px;
+  background-color: #fff;
+  background: linear-gradient(#f8f8f8, #fff);
+  box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+  border-radius: 6px;
+  overflow-y: auto;
   position: relative;
   margin: 1.5rem;
 }
@@ -390,6 +402,10 @@ html, body {
 
 .info-item span {
   font-weight: normal; /* Reset font weight */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
 }
 
 

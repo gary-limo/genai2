@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const agentNameElement = document.getElementById('agent-name'); // Element to update
     var state_name  = document.getElementById("state-name");
 
+    const ctx = document.getElementById('policyChart').getContext('2d');
+
      
 
   
@@ -98,67 +100,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
                              
 
-                            const apiResponse = JSON.parse(metricsData.forecast)
+                            const apiResponse = JSON.parse(metricsData.forecast);
 
-                             
+                            const forecasts = apiResponse.Forecasts;
 
-                            const months = Object.keys(apiResponse.policy_sold);
-                            const policySoldData = Object.values(apiResponse.policy_sold);
-                            const claimsData = Object.values(apiResponse.claims);
-                            const fraudData = Object.values(apiResponse.fraud);
+const months = forecasts.map(item => item.month);
+const policySoldData = forecasts.map(item => item.policy_sold);
+ 
 
-                            const newData = {
-                                labels: months,
-                                datasets: [
-                                    {
-                                        label: "Policy Sold",
-                                        data: policySoldData,
-                                        borderColor: "blue",
-                                        fill: false
-                                    },
-                                    {
-                                        label: "Claims",
-                                        data: claimsData,
-                                        borderColor: "green",
-                                        fill: false
-                                    },
-                                    {
-                                        label: "Fraud",
-                                        data: fraudData,
-                                        borderColor: "red",
-                                        fill: false
-                                    }
-                                ]
-                            };
-                    
-                            // Create a new chart instance every time
-                            const ctx = document.getElementById("metricsChart").getContext("2d");
-                            new Chart(ctx, {
-                                type: "line",
-                                data: newData,
-                                options: {
-                                    responsive: true,
-                                    plugins: {
-                                        title: {
-                                            display: true,
-                                            text: "Forecast"
-                                        }
-                                    },
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true,
-                                            max: 20,
-                                            ticks: {
-                                                stepSize: 5, // Set the step size to 5 to show multiples of 5
-                                            },
-                                        },
-                                    },
-                                },
-                            });
+const averagePolicySold = [85, 79, 84, 78, 85, 80];
 
 
 
-                        })
+
+const newData = {
+    labels: months,
+    datasets: [{
+        label: "Policy Sold",
+        data: policySoldData,
+        borderColor: "blue",
+        fill: false
+    }, {
+        label: "Average Policy Sold",
+        data: averagePolicySold,
+        borderColor: "green",
+        borderDash: [5, 5], // This creates a dashed line
+        fill: false
+    }]
+};
+
+ 
+const chart = Chart.getChart(ctx);
+if (chart) {
+    chart.data = newData;
+    chart.update();
+} else {
+    // Create the chart if it doesn't exist
+    const newChart = new Chart(ctx, {
+        type: 'line',
+        data: newData,
+        options: {
+            plugins: {
+                title: {
+                  display: true,
+                  text: "Forecast"
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+})
                         .catch(error => console.error("Error fetching metrics data:", error));
                 }
             });
