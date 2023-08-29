@@ -557,10 +557,10 @@ def metrics_data(request):
 
     cs = str(list(cross_sell_entries))
 
-    #print(cs)
+    print(cs)
 
     pmt = """Provide 3 major insights. Provide only Businesss insights excluding crossell data. Seprate insights using #.
-In addition to 3 insights above provide if any relevant crossell insights are avaialble , skip the crossell section if relevant information is not there.if Speciality indicator is Yes then agent can offer Boat Insurance and similarly if Additional Households with Vehicles indicator has value then the agent can offer vehicle insurance to the person listed. 
+In addition to 3 insights above provide if any relevant crossell insights are avaialble , skip the crossell section if relevant information is not there.if Speciality indicator is Yes then agent can offer Boat Insurance and similarly if Additional Households with Vehicles indicator has value then the agent can offer vehicle insurance to the person listed under additional_households_with_vehicles. 
 please consider some pointers. Digital adoption means  paperless billing. higher digital adoption means higher paperless statements.
 Do not respond like "The agent has a high level of digital adoption as indicated by the "Yes" value in the digital_adoption column".
 do not include response such as customer has a speciality indicator of "Yes". Do not provide technical information such as some transactions having a "No" value in the digital_adoption column and others having a "Yes" value. 
