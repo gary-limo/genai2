@@ -567,7 +567,7 @@ do not include response such as customer has a speciality indicator of "Yes". Do
 """
 
 
-    insights =completions(API_KEY_FILE, adj+pmt+ transposed_result + "Below is crosssell related information. Just share the insights and it is not recommened to include response like indicator is yes or indicator is no" + cs + "rank of the agent is " + str(rank) + "ranks 1 to 3 are eligible for $1000 and 4 to 8 are eligible for $500 bonus")
+    insights =completions(API_KEY_FILE, adj+pmt+ transposed_result + "Below is crosssell related information. Just share the insights and it is not recommened to include response like indicator is yes or indicator is no" + cs + ". last piece of information.rank of the agent is " + str(rank) + "ranks 1 to 3 are eligible for $1000 and 4 to 8 are eligible for $500 bonus")
     #insights='tmp'
 
     fcast_prompt=""" based on the data just give me forecast of a next 6 months for policy sold. must include 6 months only for consistency.
