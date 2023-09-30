@@ -37,7 +37,12 @@
                         </svg>
                         Insight Center
                     </a>
-                 
+                  </li>
+
+
+              
+
+
             </ul>
             <div class="tab-content-wrapper">
                 <section id="tab1-content" class="tab-content">
@@ -56,7 +61,7 @@
                     </div>
  
             
-<br>
+                      <br>
 
 
  
@@ -216,17 +221,110 @@
                 </h2>
                            
                         </div>
+
+                        <div class="right-card">
+                          <h2>Interact with the data</h2>
+                          <br>
+                          <form >
+                            {% csrf_token %}
+                            <textarea name="question" id="question"></textarea>
+                        
+                            <div class="buttons" {% if answer %}style="display: none"{% endif %}>
+                              <br>
+                              <button type="submit" id="ask-button">Ask question</button>
+                              
+                            </div>
+                            <br>
+                            <h2>
+                            <div id="responseContainer"></div>
+                          </h2>
+                          </form>
+                        
+                           
+                      </div>
+                      
+                      
+
+                 
                          
 
                     </div>
                 </section>
+
+               
                
                
             </div>
+
+          
+
+     
+
+
+
+
         </div>
+
+
+
+
+        
         
         <script src="{% static 'script.js' %}"></script>
         <script src="{% static 'ajax.js' %}"></script>
+        <script>
+
+document.getElementById('ask-button').addEventListener('click', function(e) {
+    e.preventDefault(); // Stop form from submitting and reloading page
+
+    // Get values
+    const questionValue = document.getElementById('question').value;
+    const agentValue = document.getElementById('agent-select').value;
+
+    console.log("Question:", questionValue);
+console.log("Agent:", agentValue);
+
+
+
+    // Check if values are set
+    if (!questionValue || !agentValue) {
+        alert('Please fill out the question and select an agent.');
+        return;
+    }
+
+    // Send data to backend
+    fetch('/ask', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            question: questionValue,
+            agent: agentValue
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle response data here
+        console.log(data);
+        document.getElementById('responseContainer').textContent = data.message;
+
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
+
+
+
+
+
+
+        </script>
+
+ 
+
     </body>
 </html>
     

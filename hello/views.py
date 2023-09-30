@@ -447,6 +447,13 @@ def index(request):
     return render(request, "index.html")
 
 
+
+
+
+ 
+ 
+
+
 #@csrf_exempt
 def agency_names(request):
     agency_data = {}
@@ -557,7 +564,7 @@ def metrics_data(request):
 
     cs = str(list(cross_sell_entries))
 
-    print(cs)
+    #print(cs)
 
     pmt = """Provide 3 major insights. Provide only Businesss insights excluding crossell data. Seprate insights using #.
 In addition to 3 insights above provide if any relevant crossell insights are avaialble , skip the crossell section if relevant information is not there.if Speciality indicator is Yes then agent can offer Boat Insurance and similarly if Additional Households with Vehicles indicator has value then the agent can offer vehicle insurance to the person listed under additional_households_with_vehicles. 
@@ -616,3 +623,46 @@ do not include response such as customer has a speciality indicator of "Yes". Do
 
     return JsonResponse({   'policy_issued': policy_issued ,'claims_processed': claims_processed,'fraud_detected': fraud_detected,  'insights': insights , 'total_ranks':total_ranks , 'rank' : rank , 'state_name' : state_name, 'forecast': forecast})
 
+@csrf_exempt
+def ask(request):
+    
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        user_input = data.get("question", "")
+        selected_agent_name = data.get("agent", "")
+
+
+    
+
+     
+
+    
+
+    agents = AgentData.objects.filter(agent_name=selected_agent_name)
+    
+
+    transposed_data = []
+    keys = agents[0].__dict__.keys()
+    transposed_data.append("|".join(keys))
+ 
+    for agent_obj in agents:
+        agent_values = []
+        for key in keys:
+                if key != "_state":
+                    value = str(getattr(agent_obj, key))
+                    agent_values.append(value)
+        transposed_data.append("|".join(agent_values))
+    
+    transposed_result = "\n".join(transposed_data)
+    transposed_result = transposed_result.replace("_state|", "")  
+
+      
+
+    
+
+    insights_2 =completions(API_KEY_FILE,transposed_result+ user_input)
+
+    return JsonResponse({
+             
+            "message": insights_2
+        })
