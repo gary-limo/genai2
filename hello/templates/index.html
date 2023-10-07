@@ -413,16 +413,17 @@
                   <form>
                     {% csrf_token %}
                     <div class="row">
-                      <div class="col-9">
-                        <textarea name="question" id="question" class="form-control" style="resize: none; height: 38px; width: 300px;" placeholder="Type your question here"></textarea>
-                      </div>
-                      <div class="col-3">
-                        <div class="buttons" {% if answer %}style="display: none"{% endif %}>
-                          <button type="submit" id="ask-button" class="btn btn-primary" style="height: 38px;">Submit</button>
+                        <div class="col-9">
+                            <textarea name="question" id="question" class="form-control" style="resize: none; height: 50px; width: 300px; font-size: 14px;" placeholder="Type your question here"></textarea>
                         </div>
-                      </div>
+                        <div class="col-3">
+                            <div class="buttons" {% if answer %}style="display: none"{% endif %}>
+                                <button type="submit" id="ask-button" class="btn btn-primary" style="height: 50px;">Submit</button>
+                            </div>
+                        </div>
                     </div>
-                  </form>
+                </form>
+                
                   
                   
                   
