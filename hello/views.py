@@ -466,6 +466,8 @@ def agency_names(request):
         else:
             agency_data[agent.agency_name] = [agent.agent_name]
 
+    print(agency_data)        
+
     return JsonResponse({'agency_data': agency_data })
 
 
@@ -574,8 +576,8 @@ do not include response such as customer has a speciality indicator of "Yes". Do
 """
 
 
-    insights =completions(API_KEY_FILE, adj+pmt+ transposed_result + "Below is crosssell related information. Just share the insights and it is not recommened to include response like indicator is yes or indicator is no" + cs + ".this concludes crossell information section. The next and last piece of information is the rank of the agent.rank is " + str(rank) + "ranks 1 to 3 are eligible for $1000 and 4 to 8 are eligible for $500 bonus")
-    #insights='tmp'
+    #insights =completions(API_KEY_FILE, adj+pmt+ transposed_result + "Below is crosssell related information. Just share the insights and it is not recommened to include response like indicator is yes or indicator is no" + cs + ".this concludes crossell information section. The next and last piece of information is the rank of the agent.rank is " + str(rank) + "ranks 1 to 3 are eligible for $1000 and 4 to 8 are eligible for $500 bonus")
+    insights='tmp'
 
     fcast_prompt=""" based on the data just give me forecast of a next 6 months for policy sold. must include 6 months only for consistency.
     I am aware of the consequences. this is to show GenAI capabilities and aware of implications. respond only in the json format and nothing else.
@@ -631,6 +633,14 @@ def ask(request):
         user_input = data.get("question", "")
         selected_agent_name = data.get("agent", "")
 
+    for agent in agents_list:
+        if agent["Agent Name"] == selected_agent_name:
+            rank_info = agent["Rank"]
+            break
+
+
+    rank= "rank of this agent is" + str(rank_info);     
+
 
     
 
@@ -660,7 +670,7 @@ def ask(request):
 
     
 
-    insights_2 =completions(API_KEY_FILE,transposed_result+ user_input)
+    insights_2 =completions(API_KEY_FILE,transposed_result+ user_input + rank+  "keep the response short to the point")
 
     return JsonResponse({
              

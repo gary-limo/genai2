@@ -80,53 +80,18 @@ header {
     gap: 8px;
 }
 
-.tabs a {
-    position: relative;
-    display: flex;
-    text-decoration: none;
-    width: 100%;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--gray-mid);
-    text-align: left;
-    border-radius: 8px;
-    justify-content: start;
-    padding: 12px;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease-in-out;
-}
 
-.tabs a img {
-    height: 20px;
-    width: 20px;
-}
-
-.tabs .active, .tabs a:hover {
-    font-weight: 700;
-    outline: none;
-    color: white;
-    background-color: var(--gray-dark);
-}
-
-
-.tabs a svg {
-    stroke: var(--gray-mid);
-}
-
-.tabs .active svg {
-    stroke: var(--white);
-}
-
-.tabs a:hover svg {
-    stroke: var(--white);
-} 
+ 
+ 
  
 html, body {
   
   font-family: Abel, Arial, Verdana, sans-serif;
   margin: 0;
 }
+
+ 
+ 
 
 .center {
   position: absolute;
@@ -163,25 +128,14 @@ html, body {
   text-align: center;
 }
 
-.card .additional {
-  position: absolute;
-  width: 150px;
-  height: 100%;
-  background: linear-gradient(#dE685E, #EE786E);
-  transition: width 0.4s;
-  overflow: hidden;
-  z-index: 2;
-}
+ 
 
 .card.green .additional {
   background: linear-gradient(#92bCa6, #A2CCB6);
 }
 
 
-.card:hover .additional {
-  width: 100%;
-  border-radius: 0 5px 5px 0;
-}
+ 
 
 .card .additional .user-card {
   width: 150px;

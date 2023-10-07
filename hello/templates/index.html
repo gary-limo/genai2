@@ -1,330 +1,694 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>GenAI POC</title>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-            rel="stylesheet"
-            type='text/css'
-        >
-        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-    </head>
-    <body>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>GenAI POC</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  
+  
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+ 
+</head>
+
+<body>  
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        
+        <span class="d-none d-lg-block">Sales Analytics</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center">
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="button" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
 
 
-        <div class="tabs-container">
-            <ul class="tabs">
-                <li>
-                    <a id="tab1" title="Home" href="#tab1">
-                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
-                             fill="none" stroke-linecap="round" stroke-linejoin="round"
-                        >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M3 3v18h18"></path>
-                            <path d="M20 18v3"></path>
-                            <path d="M16 16v5"></path>
-                            <path d="M12 13v8"></path>
-                            <path d="M8 16v5"></path>
-                            <path d="M3 11c6 0 5 -5 9 -5s3 5 9 5"></path>
-                        </svg>
-                        Insight Center
-                    </a>
-                  </li>
+        
+        <li class="nav-item dropdown pe-3">
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-umbrella-fill text-danger" style="font-size: 35px;"></i>
+              <span id="selected-agency" class="d-none d-md-block dropdown-toggle ps-2">Agency</span>
+          </a><!-- End Profile Icon -->
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+              <!-- The dynamically populated agency select dropdown -->
+              <li>
+                  <select id="agency-select" style="width: 100%;"></select>
+              </li>
+              <!-- The dynamically populated agent select dropdown -->
+               
+          </ul><!-- End Agency Dropdown Items -->
+      </li><!-- End Agency Nav -->
 
+
+      <li class="nav-item dropdown pe-3">
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-person text-danger" style="font-size: 35px;"></i>
+            <span  id="selected-agenct" class="d-none d-md-block dropdown-toggle ps-2">Agent</span>
+        </a><!-- End Profile Icon -->
+        
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li>
+                <select id="agent-select" style="width: 100%;"></select>
+            </li>
+        </ul><!-- End Profile Dropdown Items -->
+    </li><!-- End Profile Nav -->
+      
+      
+
+   
+    </nav><!-- End Icons Navigation -->
+    
+  
+  
+  
+  
+
+    
+
+
+ 
+        
+        
+      
+      
+
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="index.html">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+ 
+ 
+
+      <li class="nav-heading">Pages</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="users-profile.html">
+          <i class="bi bi-person"></i>
+          <span>Profile</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-faq.html">
+          <i class="bi bi-question-circle"></i>
+          <span>F.A.Q</span>
+        </a>
+      </li><!-- End F.A.Q Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-contact.html">
+          <i class="bi bi-envelope"></i>
+          <span>Contact</span>
+        </a>
+      </li><!-- End Contact Page Nav -->
+
+       
+ 
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row">
+
+            <!-- Sales Card -->
+            <div class="col-xxl-3 col-md-6">
+              <div class="card info-card sales-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Total Policies</h5>
+                  <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i class="bi bi-file-earmark-text"></i> <!-- Updated Icon -->
+                      </div>
+                      <div class="ps-3">
+                          <h6>145</h6>
+                         
+                      </div>
+                  </div>
+              </div>
+              
+
+              </div>
+            </div><!-- End Sales Card -->
+
+            
+
+            <!-- Revenue Card -->
+            <div class="col-xxl-3 col-md-6">
+              <div class="card info-card revenue-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Claims</h5>
+                  <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i class="bi bi-file-earmark-text"></i>
+                      </div>
+                      <div class="ps-3">
+                          <h6>$3,264</h6>
+                      </div>
+                  </div>
+              </div>
+              
+
+              </div>
+            </div><!-- End Revenue Card -->
+
+            <!-- Customers Card -->
+            <div class="col-xxl-3 col-xl-12">
+
+              <div class="card info-card customers-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Fraud</h5>
+                  <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i class="bi bi-exclamation-triangle"></i>
+                      </div>
+                      <div class="ps-3">
+                          <h6><span id="fraud-value"></span></h6>
+                      </div>
+                  </div>
+              </div>
+              
+
+                
+
+
+
+
+              </div>
+
+            </div><!-- End Customers Card -->
+
+
+            <div class="col-xxl-3 col-xl-12">
+
+              <div class="card info-card customers-card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Digital Adoption</h5>
+                  <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i class="bi bi-laptop"></i>
+                      </div>
+                      <div class="ps-3">
+                          <h6>1244</h6>
+                      </div>
+                  </div>
+              </div>
+              
+
+                
+
+
+
+
+              </div>
+
+            </div><!-- End Customers Card -->
+
+
+
+            <!-- Reports -->
+            <div class="col-12">
+              <div class="card">
 
               
 
+                <div class="card-body">
+                  <h5 class="card-title">Reports</h5>
 
-            </ul>
-            <div class="tab-content-wrapper">
-                <section id="tab1-content" class="tab-content">
+                  <!-- Line Chart -->
+                  <div id="reportsChart"></div>
 
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new ApexCharts(document.querySelector("#reportsChart"), {
+                        series: [{
+                          name: 'Sales',
+                          data: [31, 40, 28, 51, 42, 82, 56],
+                        }, {
+                          name: 'Revenue',
+                          data: [11, 32, 45, 32, 34, 52, 41]
+                        }, {
+                          name: 'Customers',
+                          data: [15, 11, 32, 18, 9, 24, 11]
+                        }],
+                        chart: {
+                          height: 350,
+                          type: 'area',
+                          toolbar: {
+                            show: false
+                          },
+                        },
+                        markers: {
+                          size: 4
+                        },
+                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                        fill: {
+                          type: "gradient",
+                          gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.3,
+                            opacityTo: 0.4,
+                            stops: [0, 90, 100]
+                          }
+                        },
+                        dataLabels: {
+                          enabled: false
+                        },
+                        stroke: {
+                          curve: 'smooth',
+                          width: 2
+                        },
+                        xaxis: {
+                          type: 'datetime',
+                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+                        },
+                        tooltip: {
+                          x: {
+                            format: 'dd/MM/yy HH:mm'
+                          },
+                        }
+                      }).render();
+                    });
+                  </script>
+                  <!-- End Line Chart -->
 
-                    <div class="selectors">
-                        <div class="selector agency-selector">
-                            <h3>Select Agency:</h3>
-                            <select id="agency-select"></select>
-                        </div>
-                        
-                        <div class="selector agent-selector">
-                            <h3>Select Agent:</h3>
-                            <select id="agent-select"></select>
-                        </div>
-                    </div>
- 
+                </div>
+
+              </div>
+            </div><!-- End Reports -->
+
             
-                      <br>
 
+           
 
- 
-                    <div class="card-container">
-                        <div class="left-cards">
+          </div>
+        </div><!-- End Left side columns -->
 
-                        <div class="card">
-                          <div class="additional">
-                            <div class="user-card">
-                           
-                              <svg width="110" height="110" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" class="center">
-                                <title id="title">Agent</title>
-                                <desc id="desc">Insurance Agent</desc>
-                                <style>
-                                  .skin { fill: #eab38f; }
-                                  .eyes { fill: #1f1f1f; }
-                                  .hair { fill: #2f1b0d; }
-                                  .line { fill: none; stroke: #2f1b0d; stroke-width:2px; }
-                                </style>
-                                <defs>
-                                  <clipPath id="scene">
-                                    <circle cx="125" cy="125" r="115"/>
-                                  </clipPath>
-                                  <clipPath id="lips">
-                                    <path d="M 106,132 C 113,127 125,128 125,132 125,128 137,127 144,132 141,142  134,146  125,146  116,146 109,142 106,132 Z" />
-                                  </clipPath>
-                                </defs>
-                                <circle cx="125" cy="125" r="120" fill="rgba(0,0,0,0.15)" />
-                                <g stroke="none" stroke-width="0" clip-path="url(#scene)">
-                                  <rect x="0" y="0" width="250" height="250" fill="#b0d2e5" />
-                                  <g id="head">
-                                    <path fill="none" stroke="#111111" stroke-width="2" d="M 68,103 83,103.5" />
-                                    <path class="hair" d="M 67,90 67,169 78,164 89,169 100,164 112,169 125,164 138,169 150,164 161,169 172,164 183,169 183,90 Z" />
-                                    <circle cx="125" cy="100" r="55" class="skin" />
-                                    <ellipse cx="102" cy="107" rx="5" ry="5" class="eyes" id="eye-left" />
-                                    <ellipse cx="148" cy="107" rx="5" ry="5" class="eyes" id="eye-right" />
-                                    <rect x="119" y="140" width="12" height="40" class="skin" />
-                                    <path class="line eyebrow" d="M 90,98 C 93,90 103,89 110,94" id="eyebrow-left" />
-                                    <path class="line eyebrow" d="M 160,98 C 157,90 147,89 140,94" id="eyebrow-right"/>
-                                    <path stroke="#111111" stroke-width="4" d="M 68,103 83,102.5" />
-                                    <path stroke="#111111" stroke-width="4" d="M 182,103 167,102.5" />
-                                    <path stroke="#050505" stroke-width="3" fill="none" d="M 119,102 C 123,99 127,99 131,102" />
-                                    <path fill="#050505" d="M 92,97 C 85,97 79,98 80,101 81,104 84,104 85,102" />
-                                    <path fill="#050505" d="M 158,97 C 165,97 171,98 170,101 169,104 166,104 165,102" />
-                                    <path stroke="#050505" stroke-width="3" fill="rgba(240,240,255,0.4)" d="M 119,102 C 118,111 115,119 98,117 85,115 84,108 84,104 84,97 94,96 105,97 112,98 117,98 119,102 Z" />
-                                    <path stroke="#050505" stroke-width="3" fill="rgba(240,240,255,0.4)" d="M 131,102 C 132,111 135,119 152,117 165,115 166,108 166,104 166,97 156,96 145,97 138,98 133,98 131,102 Z" />
-                                    <path class="hair" d="M 60,109 C 59,39 118,40 129,40 139,40 187,43 189,99 135,98 115,67 115,67 115,67 108,90 80,109 86,101 91,92 92,87 85,99 65,108 60,109" />
-                                    <path id="mouth" fill="#d73e3e" d="M 106,132 C 113,127 125,128 125,132 125,128 137,127 144,132 141,142  134,146  125,146  116,146 109,142 106,132 Z" /> 
-                                    <path id="smile" fill="white" d="M125,141 C 140,141 143,132 143,132 143,132 125,133 125,133 125,133 106.5,132 106.5,132 106.5,132 110,141 125,141 Z" clip-path="url(#lips)" />
-                                  </g>
-                                  <g id="shirt">
-                                    <path fill="#8665c2" d="M 132,170 C 146,170 154,200 154,200 154,200 158,250 158,250 158,250 92,250 92,250 92,250 96,200 96,200 96,200 104,170 118,170 118,170 125,172 125,172 125,172 132,170 132,170 Z"/>
-                                    <path id="arm-left" class="arm" stroke="#8665c2" fill="none" stroke-width="14" d="M 118,178 C 94,179 66,220 65,254" />
-                                    <path id="arm-right" class="arm" stroke="#8665c2" fill="none" stroke-width="14" d="M 132,178 C 156,179 184,220 185,254" />
-                                    <path fill="white" d="M 117,166 C 117,166 125,172 125,172 125,182 115,182 109,170 Z" />
-                                    <path fill="white" d="M 133,166 C 133,166 125,172 125,172 125,182 135,182 141,170 Z" />
-                                    <circle cx="125" cy="188" r="4" fill="#5a487b" />
-                                    <circle cx="125" cy="202" r="4" fill="#5a487b" />
-                                    <circle cx="125" cy="216" r="4" fill="#5a487b" />
-                                    <circle cx="125" cy="230" r="4" fill="#5a487b" />
-                                    <circle cx="125" cy="244" r="4" fill="#5a487b" />
-                                    <path stroke="#daa37f" stroke-width="1" class="skin hand" id="hand-left" d="M 51,270 C 46,263 60,243 63,246 65,247 66,248 61,255 72,243 76,238 79,240 82,243 72,254 69,257 72,254 82,241 86,244 89,247 75,261 73,263 77,258 84,251 86,253 89,256 70,287 59,278" /> 
-                                    <path stroke="#daa37f" stroke-width="1" class="skin hand" id="hand-right" d="M 199,270 C 204,263 190,243 187,246 185,247 184,248 189,255 178,243 174,238 171,240 168,243 178,254 181,257 178,254 168,241 164,244 161,247 175,261 177,263 173,258 166,251 164,253 161,256 180,287 191,278"/> 
-                                  </g>
-                                </g>
-                              </svg>
-                            </div>
-                            <div class="more-info">
-                                
-                              <div class="coords">
-                                <span>ABC Insurance</span>
-                                <span>Joined January 2019</span>
-                              </div>
-                              <div class="coords">
-                                <span>Insurance Agent</span>
-                                <span id="state-name"></span>
-                                <span>State: </span>
-                               
-                              </div>
-                              <div class="stats">
-                                <div>
-                                  <div class="title">Awards</div>
-                                  <i class="fa fa-trophy"></i>
-                                  <div class="value">2</div>
-                                </div>
-                                <div>
-                                  <div class="title">Exp in Years</div>
-                                  <i class="fa fa-gamepad"></i>
-                                  <div class="value">15</div>
-                                </div>
-                                <div>
-                                  <div class="title">Languages</div>
-                                  <i class="fa fa-group"></i>
-                                  <div class="value">4</div>
-                                </div>
-                                <div>
-                                  <div class="title">Certi.</div>
-                                  <i class="fa fa-coffee"></i>
-                                  <div class="value">8</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="general">
-                            <div class="info-item">
-                                <h2>Policies Sold QTR :</h2>
-                                <h2><span id="policies-sold-ytd-value"></span></h2>
-                                <br>
-                            </div>
-                            <div class="info-item">
-                                <h2>Frauds Identified :</h2>
-                                <h2><span id="fraud-value"></span></h2>
-                                <br>
-                            </div>
-                            <div class="info-item">
-                                <h2>Claims Processed :</h2>
-                                <h2><span id="claims-value"></span> </h2>
-                                <br>
-                            </div>
-                        </div>
+        <!-- Right side columns -->
+        <div class="col-lg-4">
 
-                           
-                        </div>
+          <!-- Recent Activity -->
+          <div class="card">
+            
 
+            <div class="card-body">
+              <h5 class="card-title">Interact with the data. Ask Questions</span></h5>
 
+              <div class="activity">
 
-                        <div class="card2 ">
-                            <div class="rankcard">
-                                <h2>Current Rank:</h2>
-                                <div class="ranking-meter">
-                                  
-                                  <div class="pointer" id="pointer">
-
-                                    <span id="rankNumber"></span>
-                                  </div>
-                                </div>
-                              </div>
-
-                               
-                              
-                                <canvas id="policyChart"></canvas>
-                           
-
-                            
-                              
-                            
-                        </div>
-                              
-                        </div>
-                      
-                        <div class="right-card">
-
-                            <h2>Summary</h2>
-
-                            <span></span>
-                <h2><span id="insightsElem"></span>
-                </h2>
-                           
-                        </div>
-
-                        <div class="right-card">
-                          <h2>Interact with the data</h2>
-                          <br>
-                          <form >
-                            {% csrf_token %}
-                            <textarea name="question" id="question"></textarea>
-                        
-                            <div class="buttons" {% if answer %}style="display: none"{% endif %}>
-                              <br>
-                              <button type="submit" id="ask-button">Ask question</button>
-                              
-                            </div>
-                            <br>
-                            <h2>
-                            <div id="responseContainer"></div>
-                          </h2>
-                          </form>
-                        
-                           
-                      </div>
-                      
-                      
-
+                <div class="activity-item d-flex">
+                  
                  
-                         
+                  <div class="activity-content">
+                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('Which agency does this agent belong?')">Which agency does this agent belong?</a>
+                  </div>
+                </div><!-- End activity item-->
 
+                <div class="activity-item d-flex">
+                
+                  
+                  <div class="activity-content">
+                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('Display Insights on Digital Adoption')" >Display Insights on Digital Adoption</a> 
+                  </div>
+                </div><!-- End activity item-->
+
+               
+
+                <div class="activity-item d-flex">
+          
+                  
+                  <div class="activity-content">
+                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('Peer Comparision')" >Peer Comparision?</a> 
+                  </div>
+                </div><!-- End activity item-->
+
+                <div class="activity-item d-flex">
+           
+                 
+                  <div class="activity-content">
+                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('What is the agent current rank ?')"  >What is the agent's current rank ?</a> 
+                  </div>
+                </div><!-- End activity item-->
+
+                <div class="activity-item d-flex">
+            
+                  
+
+
+    
+                   
+                  <form>
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-9">
+                        <textarea name="question" id="question" class="form-control" style="resize: none; height: 38px; width: 300px;" placeholder="Type your question here"></textarea>
+                      </div>
+                      <div class="col-3">
+                        <div class="buttons" {% if answer %}style="display: none"{% endif %}>
+                          <button type="submit" id="ask-button" class="btn btn-primary" style="height: 38px;">Submit</button>
+                        </div>
+                      </div>
                     </div>
-                </section>
+                  </form>
+                  
+                  
+                  
+                  
+                  
 
-               
-               
-               
+                      
+                 
+                  
+                </div><!-- End activity item-->
+
+              </div>
+
             </div>
+          </div><!-- End Recent Activity -->
+
+          <!-- Budget Report -->
+          <div class="card">
+          
+
+            <div class="card-body pb-0">
+              <h5 class="card-title">GenAI Response</h5>
+
+              <div id="responseContainer" style="min-height: 400px;"></div>
+
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                  // Create a new <p> element
+                  var responseElement = document.createElement("p");
+              
+                  // Set the text content of the element to your message
+                  responseElement.textContent = "Response from GPT";
+               
+              
+                ;
+                });
+              </script>
+              
+
+            </div>
+          </div><!-- End Budget Report -->
 
           
 
-     
+           
 
+        </div><!-- End Right side columns -->
 
+      </div>
+    </section>
 
+  </main><!-- End #main -->
 
-        </div>
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span></span></strong>. All Rights Reserved
+    </div>
+    
+  </footer><!-- End Footer -->
 
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-
-
-        
-        
-        <script src="{% static 'script.js' %}"></script>
-        <script src="{% static 'ajax.js' %}"></script>
-        <script>
-
-document.getElementById('ask-button').addEventListener('click', function(e) {
-    e.preventDefault(); // Stop form from submitting and reloading page
-
-    // Get values
-    const questionValue = document.getElementById('question').value;
-    const agentValue = document.getElementById('agent-select').value;
-
-    console.log("Question:", questionValue);
-console.log("Agent:", agentValue);
-
-
-
-    // Check if values are set
-    if (!questionValue || !agentValue) {
-        alert('Please fill out the question and select an agent.');
-        return;
-    }
-
-    // Send data to backend
-    fetch('/ask', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            question: questionValue,
-            agent: agentValue
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Handle response data here
-        console.log(data);
-        document.getElementById('responseContainer').textContent = data.message;
-
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
-
-
-
-
-
-
-
-        </script>
-
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+  
+   
  
 
-    </body>
+ 
+ 
+ 
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+    var agencySelect = document.getElementById("agency-select");
+    var agentSelect = document.getElementById("agent-select");
+    var selectedAgencyText = document.getElementById("selected-agency");
+    var selectedAgentText = document.getElementById("selected-agent");
+    var frauds_processed = document.getElementById("fraud-value");
+
+    // Add default options to agency and agent dropdowns
+    agencySelect.innerHTML = '<option value="" disabled selected>Select Agency</option>';
+    agentSelect.innerHTML = '<option value="" disabled selected>Select Agent</option>';
+
+    fetch("/agency_names")
+        .then(response => response.json())
+        .then(data => {
+            Object.keys(data.agency_data).forEach(agencyName => {
+                var option = document.createElement("option");
+                option.value = agencyName;
+                option.textContent = agencyName;
+                agencySelect.appendChild(option);
+            });
+
+            // Event listener for agency selection
+            agencySelect.addEventListener("change", function () {
+                var selectedAgency = agencySelect.value;
+
+                // Clear the agent select dropdown and set a default option
+                //  agentSelect.innerHTML = '<option value="" disabled selected>Select Agent</option>';
+
+                // Populate agent names based on the selected agency
+                data.agency_data[selectedAgency].forEach(agentName => {
+                    var option = document.createElement("option");
+                    option.value = agentName;
+                    option.textContent = agentName;
+                    agentSelect.appendChild(option);
+                });
+
+                // Reset the displayed agency text when the agency changes
+                if (selectedAgency !== "") {
+                    selectedAgencyText.textContent = selectedAgency;
+                } else {
+                    selectedAgencyText.textContent = "Agency";
+                }
+            });
+
+            // Event listener for agent selection
+            agentSelect.addEventListener("change", function () {
+                var selectedAgent = agentSelect.value;
+               
+
+
+             
+
+                if (selectedAgent === "") {
+                   
+                    frauds_processed.textContent = "";
+                 
+                    // Add other metric resets here if needed
+                } else {
+                    // Fetch data from the metrics_data endpoint based on the selected agent
+
+                    
+                    fetch(`/metrics_data?agent=${selectedAgent}`)
+                        .then(response => response.json())
+                        .then(metricsData => {
+                            // Update the placeholders with the fetched data
+                            
+                            frauds_processed.textContent = metricsData.fraud_detected;
+                            // Add other metric updates here if needed
+                        })
+                        .catch(error => console.error("Error fetching metrics data:", error));
+                }
+            });
+        })
+
+
+
+        .catch(error => console.error("Error fetching agency data:", error));
+      });
+</script>
+
+
+<script>
+
+  document.getElementById('ask-button').addEventListener('click', function(e) {
+      e.preventDefault(); // Stop form from submitting and reloading page
+  
+      // Get values
+      const questionValue = document.getElementById('question').value;
+      const agentValue = document.getElementById('agent-select').value;
+  
+      console.log("Question:", questionValue);
+  console.log("Agent:", agentValue);
+  
+  
+  
+      // Check if values are set
+      if (!questionValue || !agentValue) {
+          alert('Please fill out the question and select an agent.');
+          return;
+      }
+  
+      // Send data to backend
+      fetch('/ask', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              question: questionValue,
+              agent: agentValue
+          })
+      })
+      .then(response => response.json())
+      .then(data => {
+          // Handle response data here
+          console.log(data);
+          document.getElementById('responseContainer').textContent = data.message;
+  
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+  });
+  
+  
+  
+  
+  
+  
+  
+          </script>
+
+<script>
+  function populateTextarea(questionText) {
+    document.getElementById('question').value = questionText;
+    document.getElementById('ask-button').click();
+
+  }
+</script>
+          
+
+</body>
+
 </html>
-    
