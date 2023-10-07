@@ -23,6 +23,7 @@
   <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
   
   
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- Template Main CSS File -->
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
@@ -61,10 +62,12 @@
 
         
         <li class="nav-item dropdown pe-3">
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-              <i class="bi bi-umbrella-fill text-danger" style="font-size: 35px;"></i>
-              <span id="selected-agency" class="d-none d-md-block dropdown-toggle ps-2">Agency</span>
-          </a><!-- End Profile Icon -->
+   <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+    <i class="bi bi-ethernet text-danger" style="font-size: 35px;"></i>
+    <span id="selected-agency" class="d-none d-md-block dropdown-toggle ps-2">Agency</span>
+</a><!-- End Profile Icon -->
+
+
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
               <!-- The dynamically populated agency select dropdown -->
               <li>
@@ -79,7 +82,7 @@
       <li class="nav-item dropdown pe-3">
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-person text-danger" style="font-size: 35px;"></i>
-            <span  id="selected-agenct" class="d-none d-md-block dropdown-toggle ps-2">Agent</span>
+            <span  id="selected-agent" class="d-none d-md-block dropdown-toggle ps-2">Agent</span>
         </a><!-- End Profile Icon -->
         
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -199,7 +202,7 @@
                           <i class="bi bi-file-earmark-text"></i> <!-- Updated Icon -->
                       </div>
                       <div class="ps-3">
-                          <h6>145</h6>
+                          <h6><span id="policies-sold-ytd-value"></h6>
                          
                       </div>
                   </div>
@@ -235,7 +238,7 @@
                           <i class="bi bi-file-earmark-text"></i>
                       </div>
                       <div class="ps-3">
-                          <h6>$3,264</h6>
+                          <h6><span id="claims-value"></h6>
                       </div>
                   </div>
               </div>
@@ -303,13 +306,13 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Digital Adoption</h5>
+                  <h5 class="card-title">Digital Adoption %</h5>
                   <div class="d-flex align-items-center">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                           <i class="bi bi-laptop"></i>
                       </div>
                       <div class="ps-3">
-                          <h6>1244</h6>
+                        <h6><span id="digital-value"></span></h6>
                       </div>
                   </div>
               </div>
@@ -336,60 +339,10 @@
                   <h5 class="card-title">Reports</h5>
 
                   <!-- Line Chart -->
-                  <div id="reportsChart"></div>
+                  <canvas id="policyChart"></canvas>
 
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: 'Sales',
-                          data: [31, 40, 28, 51, 42, 82, 56],
-                        }, {
-                          name: 'Revenue',
-                          data: [11, 32, 45, 32, 34, 52, 41]
-                        }, {
-                          name: 'Customers',
-                          data: [15, 11, 32, 18, 9, 24, 11]
-                        }],
-                        chart: {
-                          height: 350,
-                          type: 'area',
-                          toolbar: {
-                            show: false
-                          },
-                        },
-                        markers: {
-                          size: 4
-                        },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: false
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'dd/MM/yy HH:mm'
-                          },
-                        }
-                      }).render();
-                    });
-                  </script>
+     
+
                   <!-- End Line Chart -->
 
                 </div>
@@ -420,7 +373,7 @@
                   
                  
                   <div class="activity-content">
-                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('Which agency does this agent belong?')">Which agency does this agent belong?</a>
+                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('What is the best performance period?')">What is the best performance period</a>
                   </div>
                 </div><!-- End activity item-->
 
@@ -428,7 +381,7 @@
                 
                   
                   <div class="activity-content">
-                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('Display Insights on Digital Adoption')" >Display Insights on Digital Adoption</a> 
+                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('Display General Insights')" >Display General Insights</a> 
                   </div>
                 </div><!-- End activity item-->
 
@@ -438,7 +391,7 @@
           
                   
                   <div class="activity-content">
-                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('Peer Comparision')" >Peer Comparision?</a> 
+                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('Peer Comparision? Compare with other agents')" >Peer Comparision? Compare with other agents</a> 
                   </div>
                 </div><!-- End activity item-->
 
@@ -548,85 +501,126 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+        var agencySelect = document.getElementById("agency-select");
+        var agentSelect = document.getElementById("agent-select");
+        var selectedAgencyText = document.getElementById("selected-agency");
+        var selectedAgentText = document.getElementById("selected-agent");
+        var frauds_processed = document.getElementById("fraud-value");
+        var policiesSoldYtdElem = document.getElementById("policies-sold-ytd-value");
+        var claims_processed = document.getElementById("claims-value");
+        var digital_processed = document.getElementById("digital-value");
 
-    var agencySelect = document.getElementById("agency-select");
-    var agentSelect = document.getElementById("agent-select");
-    var selectedAgencyText = document.getElementById("selected-agency");
-    var selectedAgentText = document.getElementById("selected-agent");
-    var frauds_processed = document.getElementById("fraud-value");
+        const ctx = document.getElementById('policyChart').getContext('2d');
+        let chart = null;
 
-    // Add default options to agency and agent dropdowns
-    agencySelect.innerHTML = '<option value="" disabled selected>Select Agency</option>';
-    agentSelect.innerHTML = '<option value="" disabled selected>Select Agent</option>';
+        // Add default options to agency and agent dropdowns
+        agencySelect.innerHTML = '<option value="" disabled selected>Select Agency</option>';
+        agentSelect.innerHTML = '<option value="" disabled selected>Select Agent</option>';
 
-    fetch("/agency_names")
-        .then(response => response.json())
-        .then(data => {
-            Object.keys(data.agency_data).forEach(agencyName => {
-                var option = document.createElement("option");
-                option.value = agencyName;
-                option.textContent = agencyName;
-                agencySelect.appendChild(option);
-            });
-
-            // Event listener for agency selection
-            agencySelect.addEventListener("change", function () {
-                var selectedAgency = agencySelect.value;
-
-                // Clear the agent select dropdown and set a default option
-                //  agentSelect.innerHTML = '<option value="" disabled selected>Select Agent</option>';
-
-                // Populate agent names based on the selected agency
-                data.agency_data[selectedAgency].forEach(agentName => {
+        fetch("/agency_names")
+            .then(response => response.json())
+            .then(data => {
+                Object.keys(data.agency_data).forEach(agencyName => {
                     var option = document.createElement("option");
-                    option.value = agentName;
-                    option.textContent = agentName;
-                    agentSelect.appendChild(option);
+                    option.value = agencyName;
+                    option.textContent = agencyName;
+                    agencySelect.appendChild(option);
                 });
 
-                // Reset the displayed agency text when the agency changes
-                if (selectedAgency !== "") {
-                    selectedAgencyText.textContent = selectedAgency;
-                } else {
-                    selectedAgencyText.textContent = "Agency";
-                }
-            });
+                // Event listener for agency selection
+                agencySelect.addEventListener("change", function () {
+                    var selectedAgency = agencySelect.value;
+                    agentSelect.innerHTML = '<option value="" disabled selected>Select Agent</option>';
 
-            // Event listener for agent selection
-            agentSelect.addEventListener("change", function () {
-                var selectedAgent = agentSelect.value;
-               
+                    // Populate agent names based on the selected agency
+                    data.agency_data[selectedAgency].forEach(agentName => {
+                        var option = document.createElement("option");
+                        option.value = agentName;
+                        option.textContent = agentName;
+                        agentSelect.appendChild(option);
+                    });
 
+                    // Reset the displayed agency text when the agency changes
+                    selectedAgencyText.textContent = selectedAgency || "Agency";
+                });
 
-             
+                // Event listener for agent selection
+                agentSelect.addEventListener("change", function () {
+                    var selectedAgent = agentSelect.value;
 
-                if (selectedAgent === "") {
-                   
-                    frauds_processed.textContent = "";
-                 
-                    // Add other metric resets here if needed
-                } else {
-                    // Fetch data from the metrics_data endpoint based on the selected agent
+                    if (!selectedAgent) {
+                        // Reset metric values if no agent is selected
+                        frauds_processed.textContent = "";
+                        policiesSoldYtdElem.textContent = "";
+                        claims_processed.textContent = "";
+                        digital_processed.textContent = "";
+                    } else {
+                        // Fetch data from the metrics_data endpoint based on the selected agent
+                        fetch(`/metrics_data?agent=${selectedAgent}`)
+                            .then(response => response.json())
+                            .then(metricsData => {
+                                // Update the placeholders with the fetched data
+                                frauds_processed.textContent = metricsData.fraud_detected;
+                                policiesSoldYtdElem.textContent = metricsData.policy_issued;
+                                claims_processed.textContent = metricsData.claims_processed;
+                                digital_processed.textContent = metricsData.digital_adoption;
 
-                    
-                    fetch(`/metrics_data?agent=${selectedAgent}`)
-                        .then(response => response.json())
-                        .then(metricsData => {
-                            // Update the placeholders with the fetched data
-                            
-                            frauds_processed.textContent = metricsData.fraud_detected;
-                            // Add other metric updates here if needed
-                        })
-                        .catch(error => console.error("Error fetching metrics data:", error));
-                }
-            });
-        })
+                                selectedAgentText.textContent = selectedAgent;
 
+                                const apiResponse = JSON.parse(metricsData.forecast);
+                                const forecasts = apiResponse.Forecasts;
+                                const months = forecasts.map(item => item.month);
+                                const policySoldData = forecasts.map(item => item.policy_sold);
+                                const averagePolicySold = [85, 79, 84, 78, 85, 80];
 
+                                const newData = {
+                                    labels: months,
+                                    datasets: [{
+                                        label: "Policy Sold",
+                                        data: policySoldData,
+                                        borderColor: "blue",
+                                        fill: false
+                                    }, {
+                                        label: "Average Policy Sold",
+                                        data: averagePolicySold,
+                                        borderColor: "green",
+                                        borderDash: [5, 5], // This creates a dashed line
+                                        fill: false
+                                    }]
+                                };
 
-        .catch(error => console.error("Error fetching agency data:", error));
-      });
+                                if (chart) {
+                                    chart.data = newData;
+                                    chart.update();
+                                } else {
+                                    // Create the chart if it doesn't exist
+                                    chart = new Chart(ctx, {
+                                        type: 'line',
+                                        data: newData,
+                                        options: {
+                                            plugins: {
+                                                title: {
+                                                    display: true,
+                                                    text: "Forecast"
+                                                }
+                                            },
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: true
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+                            })
+                            .catch(error => console.error("Error fetching metrics data:", error));
+                    }
+                });
+            })
+            .catch(error => console.error("Error fetching agency data:", error));
+    });
 </script>
+
 
 
 <script>
@@ -645,7 +639,7 @@
   
       // Check if values are set
       if (!questionValue || !agentValue) {
-          alert('Please fill out the question and select an agent.');
+          alert('Please select Agency and Agent.');
           return;
       }
   

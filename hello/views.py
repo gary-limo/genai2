@@ -22,6 +22,375 @@ API_KEY_FILE = os.environ["OPENAI_API_KEY"]
 PROMPT = "you are a business analyst" 
 
 
+
+
+
+condensed_data = """
+Bray Lindsay Stewart
+Policy Issued: 226
+Total Commission: 9040
+Total Claims: 44
+Total Fraud Detected: 1
+Monthly Policies Sold:
+June: 84
+July: 86
+August: 56
+Best Month: July with 86 policies sold.
+Worst Month: August with 56 policies sold.
+=====
+Gregory Diane Bray
+Policy Issued: 235
+Total Commission: 9400
+Total Claims: 45
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 107
+July: 108
+August: 20
+Best Month: July with 108 policies sold.
+Worst Month: August with 20 policies sold.
+=====
+Munoz Daniel Gregory
+Policy Issued: 270
+Total Commission: 10800
+Total Claims: 45
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 124
+July: 104
+August: 42
+Best Month: June with 124 policies sold.
+Worst Month: August with 42 policies sold.
+=====
+Perez Wanda Munoz
+Policy Issued: 247
+Total Commission: 9880
+Total Claims: 44
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 89
+July: 121
+August: 37
+Best Month: July with 121 policies sold.
+Worst Month: August with 37 policies sold.
+=====
+Bryant Patrick Perez
+Policy Issued: 251
+Total Commission: 10040
+Total Claims: 39
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 85
+July: 116
+August: 50
+Best Month: July with 116 policies sold.
+Worst Month: August with 50 policies sold.
+=====
+Chapman Jason Bryant
+Policy Issued: 241
+Total Commission: 9640
+Total Claims: 47
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 102
+July: 83
+August: 56
+Best Month: June with 102 policies sold.
+Worst Month: August with 56 policies sold.
+=====
+Murray Steven Chapman
+Policy Issued: 235
+Total Commission: 9400
+Total Claims: 45
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 107
+July: 108
+August: 20
+Best Month: July with 108 policies sold.
+Worst Month: August with 20 policies sold.
+=====
+Carrillo Michael Murray
+Policy Issued: 270
+Total Commission: 10800
+Total Claims: 45
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 124
+July: 104
+August: 42
+Best Month: June with 124 policies sold.
+Worst Month: August with 42 policies sold.
+=====
+Zamora Cynthia Carrillo
+Policy Issued: 250
+Total Commission: 10000
+Total Claims: 45
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 92
+July: 121
+August: 37
+Best Month: July with 121 policies sold.
+Worst Month: August with 37 policies sold.
+=====
+Jacobs Heather Zamora
+Policy Issued: 251
+Total Commission: 10040
+Total Claims: 39
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 85
+July: 116
+August: 50
+Best Month: July with 116 policies sold.
+Worst Month: August with 50 policies sold.
+=====
+Nichols Jacob Jacobs
+Policy Issued: 241
+Total Commission: 9640
+Total Claims: 47
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 102
+July: 83
+August: 56
+Best Month: June with 102 policies sold.
+Worst Month: August with 56 policies sold.
+=====
+Luna Matthew Nichols
+Policy Issued: 235
+Total Commission: 9400
+Total Claims: 45
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 107
+July: 108
+August: 20
+Best Month: July with 108 policies sold.
+Worst Month: August with 20 policies sold.
+=====
+Perry Kyle Luna
+Policy Issued: 270
+Total Commission: 10800
+Total Claims: 45
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 124
+July: 104
+August: 42
+Best Month: June with 124 policies sold.
+Worst Month: August with 42 policies sold.
+=====
+Cruz Lawrence Perry
+Policy Issued: 247
+Total Commission: 9880
+Total Claims: 44
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 89
+July: 121
+August: 37
+Best Month: July with 121 policies sold.
+Worst Month: August with 37 policies sold.
+=====
+Hamilton Miguel Cruz
+Policy Issued: 251
+Total Commission: 10040
+Total Claims: 39
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 85
+July: 116
+August: 50
+Best Month: July with 116 policies sold.
+Worst Month: August with 50 policies sold.
+=====
+Hall Erika Hamilton
+Policy Issued: 241
+Total Commission: 9640
+Total Claims: 47
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 102
+July: 83
+August: 56
+Best Month: June with 102 policies sold.
+Worst Month: August with 56 policies sold.
+=====
+Grant Shawn Hall
+Policy Issued: 235
+Total Commission: 9400
+Total Claims: 45
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 107
+July: 108
+August: 20
+Best Month: July with 108 policies sold.
+Worst Month: August with 20 policies sold.
+=====
+Martinez Monica Grant
+Policy Issued: 270
+Total Commission: 10800
+Total Claims: 45
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 124
+July: 104
+August: 42
+Best Month: June with 124 policies sold.
+Worst Month: August with 42 policies sold.
+=====
+Moore Stephanie Martinez
+Policy Issued: 247
+Total Commission: 9880
+Total Claims: 44
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 89
+July: 121
+August: 37
+Best Month: July with 121 policies sold.
+Worst Month: August with 37 policies sold.
+=====
+Anderson Peter Moore
+Policy Issued: 251
+Total Commission: 10040
+Total Claims: 39
+Total Fraud Detected: 4
+Monthly Policies Sold:
+June: 85
+July: 116
+August: 50
+Best Month: July with 116 policies sold.
+Worst Month: August with 50 policies sold.
+=====
+Jordan Tammy Anderson
+Policy Issued: 241
+Total Commission: 9640
+Total Claims: 47
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 102
+July: 83
+August: 56
+Best Month: June with 102 policies sold.
+Worst Month: August with 56 policies sold.
+=====
+Jackson Kenneth Jordan
+Policy Issued: 235
+Total Commission: 9400
+Total Claims: 45
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 107
+July: 108
+August: 20
+Best Month: July with 108 policies sold.
+Worst Month: August with 20 policies sold.
+=====
+Grimes Andrew Jackson
+Policy Issued: 270
+Total Commission: 10800
+Total Claims: 45
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 124
+July: 104
+August: 42
+Best Month: June with 124 policies sold.
+Worst Month: August with 42 policies sold.
+=====
+Nunez Ashley Grimes
+Policy Issued: 247
+Total Commission: 9880
+Total Claims: 44
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 89
+July: 121
+August: 37
+Best Month: July with 121 policies sold.
+Worst Month: August with 37 policies sold.
+=====
+Martinez Amber Nunez
+Policy Issued: 251
+Total Commission: 10040
+Total Claims: 39
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 85
+July: 116
+August: 50
+Best Month: July with 116 policies sold.
+Worst Month: August with 50 policies sold.
+=====
+Johnson Linda Martinez
+Policy Issued: 241
+Total Commission: 9640
+Total Claims: 47
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 102
+July: 83
+August: 56
+Best Month: June with 102 policies sold.
+Worst Month: August with 56 policies sold.
+=====
+Brown Lisa Johnson
+Policy Issued: 235
+Total Commission: 9400
+Total Claims: 45
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 107
+July: 108
+August: 20
+Best Month: July with 108 policies sold.
+Worst Month: August with 20 policies sold.
+=====
+Golden Kevin Brown
+Policy Issued: 270
+Total Commission: 10800
+Total Claims: 45
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 124
+July: 104
+August: 42
+Best Month: June with 124 policies sold.
+Worst Month: August with 42 policies sold.
+=====
+Gregory Brian Golden
+Policy Issued: 247
+Total Commission: 9880
+Total Claims: 44
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 89
+July: 121
+August: 37
+Best Month: July with 121 policies sold.
+Worst Month: August with 37 policies sold.
+=====
+Gordon Kathleen Gregory
+Policy Issued: 251
+Total Commission: 10040
+Total Claims: 39
+Total Fraud Detected: 0
+Monthly Policies Sold:
+June: 85
+July: 116
+August: 50
+Best Month: July with 116 policies sold.
+Worst Month: August with 50 policies sold.
+=====
+"""
+
+
+
+
 json_data_chart ='''
     [
     {
@@ -478,8 +847,12 @@ def metrics_data(request):
     policy_issue_values = []
     claim_values = []
     fraud_value = []
-    digital_adoption = []
-     
+    
+
+
+    count_all_records = 0
+    count_yes = 0
+    count_no = 0 
 
     for agent_obj in agents:
         value = getattr(agent_obj, "policy_issue", None)
@@ -508,20 +881,28 @@ def metrics_data(request):
 
 
         value = getattr(agent_obj, "digital_adoption", None)
+
         if value is not None:
-            try:
-                numeric_value = int(value)  # Try to convert the value to an integer
-                claim_values.append(numeric_value)
-            except ValueError:
-        # If conversion to integer fails, check if the string looks small/lowercase
-                if value.islower() or value.isnumeric() and len(value) <= 2:
-                    digital_adoption.append(1)  # Treat it as 1
-                else:
-                    digital_adoption.append(0)  # Treat it as 0
+          
+           
+    
+          count_all_records += 1
+          
+    
+           
+          if value.lower() == "yes":
+              count_yes += 1
+          else:
+              count_no += 1
+
+
+      
 
                 
 
 
+    
+    
     transposed_data = []
     keys = agents[0].__dict__.keys()
     transposed_data.append("|".join(keys))
@@ -547,7 +928,11 @@ def metrics_data(request):
     #insights="tmp"        
     policy_issued = sum(policy_issue_values)  
     claims_processed = sum(claim_values) 
-    fraud_detected = sum(fraud_value) 
+    fraud_detected = sum(fraud_value)
+    digital_adoption = int ((count_yes/count_all_records)*100)
+    
+
+     
 
 
     for agent in agents_list:
@@ -623,7 +1008,7 @@ do not include response such as customer has a speciality indicator of "Yes". Do
 
      
 
-    return JsonResponse({   'policy_issued': policy_issued ,'claims_processed': claims_processed,'fraud_detected': fraud_detected,  'insights': insights , 'total_ranks':total_ranks , 'rank' : rank , 'state_name' : state_name, 'forecast': forecast})
+    return JsonResponse({   'policy_issued': policy_issued ,'claims_processed': claims_processed,'fraud_detected': fraud_detected,  'insights': insights , 'total_ranks':total_ranks , 'rank' : rank , 'state_name' : state_name, 'forecast': forecast , 'digital_adoption': digital_adoption})
 
 @csrf_exempt
 def ask(request):
@@ -639,7 +1024,7 @@ def ask(request):
             break
 
 
-    rank= "rank of this agent is" + str(rank_info);     
+    rank= "rank of this agent is " + str(rank_info);     
 
 
     
@@ -664,13 +1049,15 @@ def ask(request):
         transposed_data.append("|".join(agent_values))
     
     transposed_result = "\n".join(transposed_data)
-    transposed_result = transposed_result.replace("_state|", "")  
+    transposed_result = transposed_result.replace("_state|", "") 
+
+    
 
       
 
     
 
-    insights_2 =completions(API_KEY_FILE,transposed_result+ user_input + rank+  "keep the response short to the point")
+    insights_2 =completions(API_KEY_FILE,condensed_data+ "for the agent" + selected_agent_name +  user_input + rank + " Provide results in few bullet points and keep short. Staye relevant to question asked")
 
     return JsonResponse({
              
