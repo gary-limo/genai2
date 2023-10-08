@@ -145,12 +145,7 @@
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
-          <i class="bi bi-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </li><!-- End Contact Page Nav -->
+       
 
        
  
@@ -306,7 +301,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Digital Adoption %</h5>
+                  <h5 class="card-title">Digital Adoption</h5>
                   <div class="d-flex align-items-center">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                           <i class="bi bi-laptop"></i>
@@ -373,7 +368,7 @@
                   
                  
                   <div class="activity-content">
-                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('What is the best performance period?')">What is the best performance period</a>
+                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('What is the best performance period for Carrillo Michael Murray?')">What is the best performance period for Carrillo Michael Murray</a>
                   </div>
                 </div><!-- End activity item-->
 
@@ -391,7 +386,7 @@
           
                   
                   <div class="activity-content">
-                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('Peer Comparision? Compare with other agents')" >Peer Comparision? Compare with other agents</a> 
+                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('Peer Comparision? Compare Carrillo Michael Murray and Bryant Patrick Perez')" >Peer Comparision? Compare Carrillo Michael Murray and Bryant Patrick Perez</a> 
                   </div>
                 </div><!-- End activity item-->
 
@@ -399,7 +394,7 @@
            
                  
                   <div class="activity-content">
-                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('What is the agent current rank ?')"  >What is the agent's current rank ?</a> 
+                    <a href="#" class="fw-bold text-dark" onclick="populateTextarea('What is Perry Kyle Luna  rank ?')"  >What is Perry Kyle Luna rank ?</a> 
                   </div>
                 </div><!-- End activity item-->
 
@@ -415,9 +410,13 @@
                     <div class="row">
                         <div class="col-9">
                             <textarea name="question" id="question" class="form-control" style="resize: none; height: 50px; width: 300px; font-size: 14px;" placeholder="Type your question here"></textarea>
-                        </div>
+                       
+                          </div>
                         <div class="col-3">
+                         
                             <div class="buttons" {% if answer %}style="display: none"{% endif %}>
+
+                              
                                 <button type="submit" id="ask-button" class="btn btn-primary" style="height: 50px;">Submit</button>
                             </div>
                         </div>
@@ -631,18 +630,18 @@
   
       // Get values
       const questionValue = document.getElementById('question').value;
-      const agentValue = document.getElementById('agent-select').value;
+      //const agentValue = document.getElementById('agent-select').value;
   
       console.log("Question:", questionValue);
-  console.log("Agent:", agentValue);
+  //console.log("Agent:", agentValue);
   
   
   
       // Check if values are set
-      if (!questionValue || !agentValue) {
-          alert('Please select Agency and Agent.');
-          return;
-      }
+      //if (!questionValue || !agentValue) {
+       //   alert('Please select Agency and Agent.');
+        //  return;
+     // }
   
       // Send data to backend
       fetch('/ask', {
@@ -652,14 +651,26 @@
           },
           body: JSON.stringify({
               question: questionValue,
-              agent: agentValue
+              //agent: agentValue
           })
       })
       .then(response => response.json())
       .then(data => {
           // Handle response data here
           console.log(data);
-          document.getElementById('responseContainer').textContent = data.message;
+          //let formattedInsights = data.message.replace(/#/g, '\n');
+          //document.getElementById('responseContainer').textContent = formattedInsights;
+
+          let formattedInsights = data.message
+  .split(/\d+\)\s+/) // Split the text by the pattern of a numbered statement
+  .filter(Boolean) // Remove empty elements from the resulting array
+  .map((statement, index) => `${index + 1}) ${statement}`) // Add the numbering back
+  .join('<br>'); // Join the statements with line breaks
+
+document.getElementById('responseContainer').innerHTML = formattedInsights;
+
+
+
   
       })
       .catch(error => {

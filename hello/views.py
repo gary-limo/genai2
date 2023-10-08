@@ -929,7 +929,7 @@ def metrics_data(request):
     policy_issued = sum(policy_issue_values)  
     claims_processed = sum(claim_values) 
     fraud_detected = sum(fraud_value)
-    digital_adoption = int ((count_yes/count_all_records)*100)
+    digital_adoption = str(int ((count_yes/count_all_records)*100)) + '%'
     
 
      
@@ -1016,40 +1016,8 @@ def ask(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
         user_input = data.get("question", "")
-        selected_agent_name = data.get("agent", "")
-
-    for agent in agents_list:
-        if agent["Agent Name"] == selected_agent_name:
-            rank_info = agent["Rank"]
-            break
-
-
-    rank= "rank of this agent is " + str(rank_info);     
-
-
-    
-
-     
-
-    
-
-    agents = AgentData.objects.filter(agent_name=selected_agent_name)
-    
-
-    transposed_data = []
-    keys = agents[0].__dict__.keys()
-    transposed_data.append("|".join(keys))
- 
-    for agent_obj in agents:
-        agent_values = []
-        for key in keys:
-                if key != "_state":
-                    value = str(getattr(agent_obj, key))
-                    agent_values.append(value)
-        transposed_data.append("|".join(agent_values))
-    
-    transposed_result = "\n".join(transposed_data)
-    transposed_result = transposed_result.replace("_state|", "") 
+        #selected_agent_name = data.get("agent", "")
+  
 
     
 
@@ -1057,7 +1025,10 @@ def ask(request):
 
     
 
-    insights_2 =completions(API_KEY_FILE,condensed_data+ "for the agent" + selected_agent_name +  user_input + rank + " Provide results in few bullet points and keep short. Staye relevant to question asked")
+ 
+    insights_2 =completions(API_KEY_FILE,condensed_data +  user_input +   "Seprate each response using # and numbered them for example 1) . provide upto 5 results only.Stay relevant to question asked" + json_data )
+
+    print(insights_2)
 
     return JsonResponse({
              
