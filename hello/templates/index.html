@@ -476,7 +476,7 @@
     </section>
 
   </main><!-- End #main -->
- 
+
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -636,7 +636,7 @@
                                 }
 
 
-                                let formattedInsights = metricsData.insights
+                                let formattedInsights = metricsData.insights.replace(/#/g, '')
   .split(/\d+\)\s+/) // Split the text by the pattern of a numbered statement
   .filter(Boolean) // Remove empty elements from the resulting array
   .map((statement, index) => `${index + 1}) ${statement}`) // Add the numbering back
