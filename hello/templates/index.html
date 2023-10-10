@@ -156,15 +156,7 @@
 
   <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+    
 
     <section class="section dashboard">
       <div class="row">
@@ -324,26 +316,35 @@
 
 
 
-            <!-- Reports -->
-            <div class="col-12">
-              <div class="card">
+<!-- Reports -->
+<div class="col-12">
+  <div class="card">
+      <div class="card-body" >
+          <h5 class="card-title">Reports</h5>
+          <!-- Line Chart -->
+          <canvas id="policyChart" style="max-height: 75%;"></canvas>
+          <!-- End Line Chart -->
+      </div>
+  </div>
+</div>
+<!-- End Reports -->
 
-              
+<!-- Reports -->
+<div class="col-12">
+  <div class="card">
+      <div class="card-body">
+          
+        <h5 id="selected-agent-title" class="card-title">Summary</h5>
 
-                <div class="card-body">
-                  <h5 class="card-title">Reports</h5>
+        <span id="insightsElem"></span>
+          <!-- Line Chart -->
+          <!-- End Line Chart -->
+      </div>
+  </div>
+</div>
 
-                  <!-- Line Chart -->
-                  <canvas id="policyChart"></canvas>
+<!-- End Reports -->
 
-     
-
-                  <!-- End Line Chart -->
-
-                </div>
-
-              </div>
-            </div><!-- End Reports -->
 
             
 
@@ -444,7 +445,7 @@
           
 
             <div class="card-body pb-0">
-              <h5 class="card-title">GenAI Response</h5>
+              <h5 class="card-title"></h5>
 
               <div id="responseContainer" style="min-height: 400px;"></div>
 
@@ -509,6 +510,7 @@
         var policiesSoldYtdElem = document.getElementById("policies-sold-ytd-value");
         var claims_processed = document.getElementById("claims-value");
         var digital_processed = document.getElementById("digital-value");
+        const insightsElem = document.getElementById("insightsElem");
 
         const ctx = document.getElementById('policyChart').getContext('2d');
         let chart = null;
@@ -554,6 +556,19 @@
                         policiesSoldYtdElem.textContent = "";
                         claims_processed.textContent = "";
                         digital_processed.textContent = "";
+
+                        selectedAgentText.textContent = "Summary";
+                        insightsElem.innerText = "";
+
+        // Reset the displayed agent name in the <span> element
+        var selectedAgentSpan = document.getElementById("selected-agent");
+        selectedAgentSpan.textContent = "";
+
+        // Reset the displayed agent name in the <h5> element
+        var selectedAgentTitle = document.getElementById("selected-agent-title");
+        selectedAgentTitle.textContent = "Summary";
+
+
                     } else {
                         // Fetch data from the metrics_data endpoint based on the selected agent
                         fetch(`/metrics_data?agent=${selectedAgent}`)
@@ -566,6 +581,18 @@
                                 digital_processed.textContent = metricsData.digital_adoption;
 
                                 selectedAgentText.textContent = selectedAgent;
+
+                                // Update the displayed agent name in the <span> element
+                var selectedAgentSpan = document.getElementById("selected-agent");
+                selectedAgentSpan.textContent = selectedAgent;
+
+                // Update the displayed agent name in the <h5> element
+                var selectedAgentTitle = document.getElementById("selected-agent-title");
+                selectedAgentTitle.textContent =   selectedAgent + " - Summary" ;
+
+
+
+                                
 
                                 const apiResponse = JSON.parse(metricsData.forecast);
                                 const forecasts = apiResponse.Forecasts;
@@ -606,14 +633,41 @@
                                             },
                                             scales: {
                                                 y: {
-                                                    beginAtZero: true
+                                                    beginAtZero: true,
+                                                    min: 30 
                                                 }
                                             }
+                                            
                                         }
                                     });
                                 }
+
+
+                                let formattedInsights = metricsData.insights
+  .split(/\d+\)\s+/) // Split the text by the pattern of a numbered statement
+  .filter(Boolean) // Remove empty elements from the resulting array
+  .map((statement, index) => `${index + 1}) ${statement}`) // Add the numbering back
+  .join('<br>'); // Join the statements with line breaks
+insightsElem.innerHTML = formattedInsights;
+
+
+
+
+
                             })
                             .catch(error => console.error("Error fetching metrics data:", error));
+
+
+
+                            
+
+
+
+
+
+
+
+
                     }
                 });
             })

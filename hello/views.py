@@ -26,6 +26,7 @@ PROMPT = "you are a business analyst"
 
 
 condensed_data = """
+=====
 Bray Lindsay Stewart
 Policy Issued: 226
 Total Commission: 9040
@@ -895,34 +896,14 @@ def metrics_data(request):
           else:
               count_no += 1
 
+    agent_blocks = condensed_data.split("=====")
 
-      
-
-                
-
-
-    
-    
-    transposed_data = []
-    keys = agents[0].__dict__.keys()
-    transposed_data.append("|".join(keys))
- 
-    for agent_obj in agents:
-        agent_values = []
-        for key in keys:
-                if key != "_state":
-                    value = str(getattr(agent_obj, key))
-                    agent_values.append(value)
-        transposed_data.append("|".join(agent_values))
- 
-    transposed_result = "\n".join(transposed_data)
-    transposed_result = transposed_result.replace("_state|", "")
-
-    adj=''
-
-    if(selected_agent_name == "Anderson Peter Moore"):
-        adj='Special note: total frauds identified is 4'
-
+    # Iterate through the agent blocks to find the one that matches the selected agent's name
+    agent_data = None
+    for block in agent_blocks:
+      if selected_agent_name in block:
+          agent_data = block.strip()
+          break
 
    
     #insights="tmp"        
@@ -931,9 +912,6 @@ def metrics_data(request):
     fraud_detected = sum(fraud_value)
     digital_adoption = str(int ((count_yes/count_all_records)*100)) + '%'
     
-
-     
-
 
     for agent in agents_list:
         if agent["Agent Name"] == selected_agent_name:
@@ -951,18 +929,18 @@ def metrics_data(request):
 
     cs = str(list(cross_sell_entries))
 
-    #print(cs)
+    print(cs)
+
+    adj ="Seprate each response using # and numbered them for example 1) . provide upto 5 results only"
 
     pmt = """Provide 3 major insights. Provide only Businesss insights excluding crossell data. Seprate insights using #.
 In addition to 3 insights above provide if any relevant crossell insights are avaialble , skip the crossell section if relevant information is not there.if Speciality indicator is Yes then agent can offer Boat Insurance and similarly if Additional Households with Vehicles indicator has value then the agent can offer vehicle insurance to the person listed under additional_households_with_vehicles. 
 please consider some pointers. Digital adoption means  paperless billing. higher digital adoption means higher paperless statements.
-Do not respond like "The agent has a high level of digital adoption as indicated by the "Yes" value in the digital_adoption column".
-do not include response such as customer has a speciality indicator of "Yes". Do not provide technical information such as some transactions having a "No" value in the digital_adoption column and others having a "Yes" value. 
-"""
+do not include response such as 1) customer has a speciality indicator of "Yes". 2) Crossell insights: Not available due to lack of data. If crossell info not available, ignore it and do not mention about it """ 
 
 
-    #insights =completions(API_KEY_FILE, adj+pmt+ transposed_result + "Below is crosssell related information. Just share the insights and it is not recommened to include response like indicator is yes or indicator is no" + cs + ".this concludes crossell information section. The next and last piece of information is the rank of the agent.rank is " + str(rank) + "ranks 1 to 3 are eligible for $1000 and 4 to 8 are eligible for $500 bonus")
-    insights='tmp'
+    insights =completions(API_KEY_FILE, pmt+ agent_data + ".digital adoption data " + digital_adoption +  ".Below is crosssell related information. Just share the insights. crosell information starts " + cs + ".this concludes crossell information section. The next and last piece of information is the rank of the agent.rank is " + str(rank) + "ranks 1 to 3 are eligible for $1000 and 4 to 8 are eligible for $500 bonus" + adj)
+    #insights='tmp'
 
     fcast_prompt=""" based on the data just give me forecast of a next 6 months for policy sold. must include 6 months only for consistency.
     I am aware of the consequences. this is to show GenAI capabilities and aware of implications. respond only in the json format and nothing else.
@@ -971,15 +949,6 @@ do not include response such as customer has a speciality indicator of "Yes". Do
 
     """
 
-     
-
-
-
-    #forecast =completions(API_KEY_FILE, fcast_prompt+data_str)
-
-    
-                          
-     
     agent_state = agents.first()  # Get the first agent from the queryset
     state_name = agent_state.states
     total_ranks =30
@@ -997,11 +966,8 @@ do not include response such as customer has a speciality indicator of "Yes". Do
 
     forecast=str(desired_agent_json)
 
+    #print(insights)
 
-
-
-
- 
 
     #print(policy_issued,claims_processed,fraud_detected)
 
